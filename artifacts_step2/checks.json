@@ -1,0 +1,9 @@
+{
+  "graph_future_availability_excluded": true,
+  "graph_future_occurrence_excluded": true,
+  "checkpoint_matches_graph_implementation": true,
+  "fixed_eight_epoch_experiment": true,
+  "n_selected_users": 4931,
+  "completed_window_scoring_matches_recorded_diagnostics_all_three_candidates": true,
+  "fresh_future_scores_still_pending": true
+}

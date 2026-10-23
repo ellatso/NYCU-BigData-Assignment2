@@ -1,0 +1,11 @@
+{
+  "tests_run": 4,
+  "failures": 0,
+  "errors": 0,
+  "checks": [
+    "weighted row normalization and empty relations",
+    "end-to-end gradient flow through both graph hops and peers",
+    "no-graph ablation ignores edges",
+    "messages change outputs"
+  ]
+}

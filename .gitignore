@@ -5,3 +5,9 @@ artifacts/cache/
 *.pkl
 assignment2_data/
 .env
+**/cache/
+*.pt
+*.npz
+artifacts_step2/local/
+**/holdout_predictions_*.csv
+**/output_*.csv

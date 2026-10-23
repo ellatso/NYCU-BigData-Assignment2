@@ -1,10 +1,10 @@
-# NYCU Big Data Assignment 2 — first measured baseline
+# NYCU Big Data Assignment 2
 
 Author: Chen Jhen Tso (113700058). Individual assignment, Fall 2026.
 
-[Open the notebook in Colab](https://colab.research.google.com/github/ellatso/NYCU-BigData-Assignment2/blob/main/notebooks/Asg2_Start.ipynb) | [Measured results](artifacts/metrics.csv) | [Schema graph](artifacts/graphs/schema.svg) | [Entity graph](artifacts/graphs/entity_graph.svg)
+[Step 1 in Colab](https://colab.research.google.com/github/ellatso/NYCU-BigData-Assignment2/blob/main/notebooks/Asg2_Start.ipynb) | [Step 2 graph comparison in Colab](https://colab.research.google.com/github/ellatso/NYCU-BigData-Assignment2/blob/main/notebooks/Asg2_Graph.ipynb) | [Measured results](artifacts/metrics.csv) | [Schema graph](artifacts/graphs/schema.svg) | [Entity graph](artifacts/graphs/entity_graph.svg)
 
-This is a functioning CPU baseline and experiment scaffold, **not a completed November submission or a claim of full marks**. It uses only the instructor's official relational data. No GitHub user API or external activity data are collected.
+This repository contains measured CPU baselines and a temporal relational graph neural network comparison. Official November predictions and presentation deliverables are pending. It uses only the instructor's official relational data. No GitHub user API or external activity data are collected.
 
 ## Quick start
 
@@ -51,7 +51,7 @@ Six LightGBM binary classifiers, one per target. Fixed seed 42, 160 trees, learn
 - `relational`: static user features plus user-repo-user neighborhood aggregation and cross-table PR/issue-author interaction counts.
 - `full`: all above plus 30-day relational aggregates.
 
-Relations use FKs to connect activity to users/repositories and join review/discussion events to PR/issue authors. Repository activity excludes each user's own contribution when constructing neighboring activity. Non-cohort activity is incomplete by construction; neighborhood statistics describe the supplied observed graph, not complete GitHub traffic. This is relational feature aggregation followed by tree models, **not a GNN or end-to-end RDL architecture**. Whether a final submission based only on aggregated features meets the instructor's phrase “directly analyze relational databases” should be confirmed; adding an explicit relational graph model is a planned comparison, not yet implemented.
+Relations use FKs to connect activity to users/repositories and join review/discussion events to PR/issue authors. Repository activity excludes each user's own contribution when constructing neighboring activity. Non-cohort activity is incomplete by construction; neighborhood statistics describe the supplied observed graph, not complete GitHub traffic. This is relational feature aggregation followed by tree models, **not a GNN or end-to-end RDL architecture**. An explicit graph neural comparison is now implemented and measured in Step 2 below; the Step 1 aggregation model is retained as a baseline.
 
 Thresholds are calibrated using the exact `(macro_F1 + micro_F1)/2` objective, including the official convention that an empty target with no false predictions has F1=1. Each threshold search is confined to calibration data. A simple last-week rule is included to guard against mistaking model complexity for improvement.
 
@@ -89,3 +89,49 @@ You still need a public GitHub repository, English slides using the teacher's te
 ## Source attribution
 
 Data, schema and evaluator: https://github.com/nycubigdata-2026fall/BigData2026-Assignment2 . Model and experiment code in this package was prepared with AI assistance. No results are fabricated. Dependencies in `requirements.txt` are direct requirements; actual local versions are saved in `artifacts/environment.json`.
+
+
+## Step 2 — actual relational message passing comparison
+
+`asg2/graph.py` projects the eight relational tables to **user and repository nodes**. It does not claim to instantiate an eight-node-type graph. There are six typed user-repository activity relations, each in both directions, and three types of author interaction (issue discussion, PR review, PR line comment), each in both directions. Every message channel has its own learned linear transform. The model first aggregates user messages into repositories, then repository messages back into users; direct actor/author messages are added. All these transforms receive gradients from the six binary classification losses. There are no learned user-ID embeddings.
+
+All graph rows, endpoints and interactions are filtered to the origin minus four hours. Edges use only the preceding 90 days. Repeated interactions receive summed `exp(-age_days/30)` weights; each receiving row is normalized separately per relation. User and repo node features contain 7/30/90-day activity counts and per-target recency, with fixed numerical scaling. Non-cohort users may be context nodes but are never treated as fully observed labeled training users.
+
+The **user MLP ablation** uses the identical user node features, user encoder, prediction head, training windows, positive-class weights and threshold calibration; it ignores graph messages. The graph candidate adds repository and interaction messages. Fixed configuration before diagnostic scoring: hidden size 32, 8 epochs, AdamW learning rate .003, weight decay .001, dropout .15, seed 42. Training-week optimization order is seeded and shuffled; no random row train/test split is used. Loss gives each sampled historical graph equal weight, with class weights computed from training labels only.
+
+| Candidate | Macro F1 | Micro F1 | Combined diagnostic score |
+|---|---:|---:|---:|
+| User MLP | 41.95% | 54.52% | 48.23% |
+| Temporal relational GNN | 42.60% | 54.45% | 48.52% |
+| Step 1 temporal LightGBM reference | 44.55% | 55.79% | 50.17% |
+
+The neural pair is an apples-to-apples message-passing ablation; the LightGBM reference has a different feature design. The GNN slightly improved the neural pair's combined diagnostic score, but did not beat the temporal tree baseline. It improved macro F1 while slightly decreasing micro F1. The two diagnostic weeks disagree on the graph advantage; no robust superiority or statistical significance is claimed.
+
+**These October 8/15 dates were already inspected in Step 1. They are now explicitly development diagnostics, not a fresh untouched test.** Calibration is still restricted to Sep24 and no diagnostic labels select epochs or thresholds. Candidate definitions are being frozen before new complete forward weeks are available. Planned forward origins: Oct22 and Oct29, Taiwan midnight; their full seven-day outcomes require releases on/after Oct29 and Nov5 respectively. `forward` reports PENDING before those outcomes are available; it never scores a partial future week. Do not repeatedly change models after reading a forward result and still call that week untouched.
+
+```powershell
+python -m pip install -r requirements_graph.txt
+python -m asg2.graph_run train --data ../assignment2_data --out artifacts_step2 --device cpu
+python -m unittest discover -s tests -v
+python scripts/check_graph_asof.py --data ../assignment2_data --out artifacts_step2
+# Later: attach/reuse the frozen checkpoints, update only the official input data,
+# and evaluate without retraining these candidate models.
+python -m asg2.graph_run forward --data ../assignment2_data --out artifacts_step2 --device cpu
+```
+
+For GPU use `--device cuda:0`; this code does not use DataParallel or require two GPUs. The recorded experiment was actually executed on CPU with PyTorch 2.14.1+cpu. Graph and data fingerprints isolate cached tensors. Sparse tensors, user IDs, learned checkpoints and per-user predictions remain local; only code and aggregate results are public. The forward evaluator also reports temporal LightGBM if the Step 1 checkpoint is present and its training-data manifest matches the frozen graph experiment. Preserve `artifacts/model_temporal.pkl`, its data manifest, and `artifacts_step2/*.pt` privately; the public repo deliberately excludes model binaries. The prior-data snapshot has been preserved separately to allow refitting frozen candidates from their original data if necessary.
+
+Executed checks: normalized/empty relations; gradients through both graph hops and direct peer messages; no-graph ablation ignores edges; graph edges affect outputs; real-data features and adjacencies ignore injected future occurrence/availability records; checkpoint implementation hash matches source; future outcomes produce PENDING. Results and protocol: `artifacts_step2/metrics.csv`, `protocol.json`, `checks.json`, training histories and threshold JSONs. New future scores have not yet been measured. Step 2 neural models are not wired into the final CSV command; the implemented final prediction path remains the calibration-selected Step 1 tree candidate until a documented later selection is made.
+
+### Graph experiment flow
+
+```mermaid
+flowchart LR
+  A[Eight official tables before cutoff] --> B[Temporal features and typed graph]
+  B --> C[User to repo to user messages]
+  B --> D[Actor to PR and issue author messages]
+  C --> E[Six binary logits]
+  D --> E
+  E --> F[Thresholds calibrated on Sep24]
+  F --> G[Diagnostics and frozen forward comparison]
+```

@@ -1,0 +1,44 @@
+{
+  "graph_version": "temporal-projected-rgnn-v1",
+  "implementation_sha256": "ddfed9113fd58aa9cd15ee25c60573cce3fabb782b9673820406e090b1b2c28a",
+  "train_origins": [
+    "2026-05-06 16:00:00",
+    "2026-05-13 16:00:00",
+    "2026-05-20 16:00:00",
+    "2026-05-27 16:00:00",
+    "2026-06-03 16:00:00",
+    "2026-06-10 16:00:00",
+    "2026-06-17 16:00:00",
+    "2026-06-24 16:00:00",
+    "2026-07-01 16:00:00",
+    "2026-07-08 16:00:00",
+    "2026-07-15 16:00:00",
+    "2026-07-22 16:00:00",
+    "2026-07-29 16:00:00",
+    "2026-08-05 16:00:00",
+    "2026-08-12 16:00:00",
+    "2026-08-19 16:00:00",
+    "2026-08-26 16:00:00",
+    "2026-09-02 16:00:00",
+    "2026-09-09 16:00:00"
+  ],
+  "calibration_origins": [
+    "2026-09-23 16:00:00"
+  ],
+  "diagnostic_origins": [
+    "2026-10-07 16:00:00",
+    "2026-10-14 16:00:00"
+  ],
+  "planned_fresh_origins": [
+    "2026-10-22 00:00:00+08:00",
+    "2026-10-29 00:00:00+08:00"
+  ],
+  "epochs_fixed_before_diagnostic": 8,
+  "hidden_fixed_before_diagnostic": 32,
+  "seed": 42,
+  "device": "cpu",
+  "torch_version": "2.14.1+cpu",
+  "observation_gap_hours": 4,
+  "diagnostic_not_used_for_epoch_selection": true,
+  "notes": "October8/15 were already inspected in Step1, so scores are development diagnostics. Freeze candidates before evaluating new forward weeks."
+}
