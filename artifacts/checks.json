@@ -1,0 +1,7 @@
+{
+  "future_availability_excluded": true,
+  "future_occurrence_excluded": true,
+  "stable_github_output_ids": true,
+  "official_score_equivalence_including_empty_classes": true,
+  "nonoverlapping_train_calibration_holdout": true
+}

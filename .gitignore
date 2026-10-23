@@ -1,0 +1,7 @@
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+artifacts/cache/
+*.pkl
+assignment2_data/
+.env

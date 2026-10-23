@@ -1,0 +1,14 @@
+{
+  "schema_tables": 8,
+  "schema_fk_edges": 20,
+  "entity_nodes": 30,
+  "entity_edges": 57,
+  "activity_rows_in_window": 17,
+  "start_utc": "2026-09-15 00:00:00",
+  "end_utc_exclusive": "2026-09-17 00:00:00",
+  "seed_github_ids": [
+    22996444,
+    28983449
+  ],
+  "context_policy": "necessary foreign-key endpoints may predate the selected activity window; no future rows or unrelated repo events"
+}
