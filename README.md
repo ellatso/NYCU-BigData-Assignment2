@@ -8,6 +8,8 @@ See [the measured audit report](artifacts_20261102/REPORT.md) for the latest dat
 
 The [second-round feature and push-coverage experiment](artifacts_v2_20261102/REPORT.md) compares six fixed recipes. Short-term features did not consistently improve the original baseline; thread features were too sparse to be used by the fitted trees. The original submission path remains unchanged.
 
+The [multiweek calibration and recent-training comparison](artifacts_v3_20261102/REPORT.md) records the fixed nine-candidate experiment and a clearly labeled follow-up that isolates calibration horizon. The original model remains the reference. A calibration-selected recent12/25% frequency challenger is frozen for comparison only. [English Q2/Q3 slide copy and Mandarin narration notes](report_materials/Q2_Q3_Evidence.md) are ready to place in the instructor template. The real 3,960-ID format rehearsal passed, but no final November submission has been generated.
+
 [Step 1 in Colab](https://colab.research.google.com/github/ellatso/NYCU-BigData-Assignment2/blob/main/notebooks/Asg2_Start.ipynb) | [Step 2 graph comparison in Colab](https://colab.research.google.com/github/ellatso/NYCU-BigData-Assignment2/blob/main/notebooks/Asg2_Graph.ipynb) | [Measured results](artifacts/metrics.csv) | [Schema graph](artifacts/graphs/schema.svg) | [Entity graph](artifacts/graphs/entity_graph.svg)
 
 This repository contains measured CPU baselines and a temporal relational graph neural network comparison. Official November predictions and presentation deliverables are pending. It uses only the instructor's official relational data. No GitHub user API or external activity data are collected.

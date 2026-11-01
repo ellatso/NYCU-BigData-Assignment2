@@ -1,0 +1,40 @@
+{
+  "frozen_model": "original_temporal_singleweek",
+  "source_commit": "1d35fcb17bfd9a8e3ab032421d68f5b7abd73136",
+  "model_sha256": "02b8cf7ad62079342e2b9505141754205c5e35251b458921ccb5b6b5dcc05303",
+  "n_features": 51,
+  "thresholds": [
+    0.65,
+    0.49999999999999994,
+    0.65,
+    0.7,
+    0.675,
+    0.15
+  ],
+  "training_source": "artifacts_20261102/protocol.json",
+  "new_recipe_adopted": false,
+  "reason": "New recipes did not consistently improve inspected development outcomes",
+  "reserved_origin": "2026-10-29T00:00:00+08:00",
+  "reserved_outcomes_scored": false,
+  "rehearsal_origin_taiwan": "2026-11-02T00:00:00+08:00",
+  "rehearsal_users": 3960,
+  "format_check": "Format check: no errors (3960 users)",
+  "final_submission_generated": false,
+  "warning": "Rehearsal checks format and ID mapping only. No November12 truth or score is available.",
+  "experimental_challenger": {
+    "name": "recent12_single_freq25",
+    "recipe": "recent12",
+    "frequency_weight": 0.25,
+    "thresholds": [
+      0.575,
+      0.44999999999999996,
+      0.575,
+      0.575,
+      0.575,
+      0.2
+    ],
+    "model_sha256": "2f4d4f5827272444329c46f53003d4dee1cda5bb206764bc4d92a4182d5d3041",
+    "status": "Frozen for comparison only. Post-inspection diagnostic, not adopted."
+  }
+}
+CHECKPOINT ../Asg2_Frozen_Baseline_20261102.zip 2117670
