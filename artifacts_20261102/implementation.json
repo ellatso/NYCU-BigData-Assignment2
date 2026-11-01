@@ -1,0 +1,10 @@
+{
+  "source_base_commit": "8fa06c61a43496cbefe5e7fd514d236ab5ff254d",
+  "source_sha256": {
+    "asg2/core.py": "47a900f3eaaf5bc6d28254abffd3bc3df1b53bc3fd7a0cc34f89d637789639aa",
+    "asg2/run.py": "7355f13c4757c4e9e483ce086e55032b27e2db7f3284c5b82d99cdae55e4b21a",
+    "scripts/audit_data.py": "1bde5b47ecf3241970fc99f5bc506a37deff175ebcf2b84bacaf002d1709f86d",
+    "scripts/recheck_baselines.py": "d7bfbbedd3073cf216972194aedf462868950c0ea5cb00ad66e08d836b27e896",
+    "tests/test_baselines.py": "4c7f64b928f76dcbf191e63b0ba4b557e4eb5920355e3397a28ea761503b46e4"
+  }
+}

@@ -73,7 +73,9 @@ def features(tables,events,origin,user_ids=None,gap_hours=4):
         mapped=lookup.loc[ids]
         if not mapped.is_cohort.all() or not (mapped.first_seen_at<t).all():
             raise ValueError('Input contains non-cohort or not-yet-seen users')
-        u=mapped.reset_index().set_index('user_id')
+        # .loc with an unnamed Index can discard the lookup index name.
+        # Restore it explicitly so official-ID prediction works across pandas versions.
+        u=mapped.rename_axis('github_user_id').reset_index().set_index('user_id')
     idx=u.index;X=pd.DataFrame(index=idx)
     X['u_age_days']=(t-u.first_seen_at).dt.total_seconds()/86400
     life=counts(past,idx)
