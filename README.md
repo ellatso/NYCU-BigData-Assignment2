@@ -6,6 +6,8 @@ Author: Chen Jhen Tso (113700058). Individual assignment, Fall 2026.
 
 See [the measured audit report](artifacts_20261102/REPORT.md) for the latest data integrity checks, reproduced baselines, Oct22 retrospective scores, official-roster validation and the explicit-ID inference fix. The latest release has suspicious target-specific coverage gaps (notably no recorded pushes after Oct26); recent scores are provisional. Oct29 outcomes remain pending. No final November submission has been generated.
 
+The [second-round feature and push-coverage experiment](artifacts_v2_20261102/REPORT.md) compares six fixed recipes. Short-term features did not consistently improve the original baseline; thread features were too sparse to be used by the fitted trees. The original submission path remains unchanged.
+
 [Step 1 in Colab](https://colab.research.google.com/github/ellatso/NYCU-BigData-Assignment2/blob/main/notebooks/Asg2_Start.ipynb) | [Step 2 graph comparison in Colab](https://colab.research.google.com/github/ellatso/NYCU-BigData-Assignment2/blob/main/notebooks/Asg2_Graph.ipynb) | [Measured results](artifacts/metrics.csv) | [Schema graph](artifacts/graphs/schema.svg) | [Entity graph](artifacts/graphs/entity_graph.svg)
 
 This repository contains measured CPU baselines and a temporal relational graph neural network comparison. Official November predictions and presentation deliverables are pending. It uses only the instructor's official relational data. No GitHub user API or external activity data are collected.

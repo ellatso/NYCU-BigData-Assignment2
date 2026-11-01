@@ -1,0 +1,31 @@
+{
+  "training_rows": 148917,
+  "positive_training_rows_per_thread_feature": {
+    "v2r_thread_other3_IssueComments": 12,
+    "v2r_live_threads3_IssueComments": 12,
+    "v2r_thread_other7_IssueComments": 35,
+    "v2r_live_threads7_IssueComments": 35,
+    "v2r_thread_other3_PRReviews": 8,
+    "v2r_live_threads3_PRReviews": 8,
+    "v2r_thread_other7_PRReviews": 36,
+    "v2r_live_threads7_PRReviews": 36,
+    "v2r_thread_other3_PRReviewComments": 11,
+    "v2r_live_threads3_PRReviewComments": 11,
+    "v2r_thread_other7_PRReviewComments": 20,
+    "v2r_live_threads7_PRReviewComments": 20
+  },
+  "total_tree_splits_per_thread_feature": {
+    "v2r_thread_other3_IssueComments": 0,
+    "v2r_live_threads3_IssueComments": 0,
+    "v2r_thread_other7_IssueComments": 0,
+    "v2r_live_threads7_IssueComments": 0,
+    "v2r_thread_other3_PRReviews": 0,
+    "v2r_live_threads3_PRReviews": 0,
+    "v2r_thread_other7_PRReviews": 0,
+    "v2r_live_threads7_PRReviews": 0,
+    "v2r_thread_other3_PRReviewComments": 0,
+    "v2r_live_threads3_PRReviewComments": 0,
+    "v2r_thread_other7_PRReviewComments": 0,
+    "v2r_live_threads7_PRReviewComments": 0
+  }
+}
