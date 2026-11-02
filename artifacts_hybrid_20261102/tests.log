@@ -1,0 +1,25 @@
+test_explicit_ids_preserve_order_and_stable_identity (test_baselines.BaselineTests.test_explicit_ids_preserve_order_and_stable_identity) ... ok
+test_future_availability_is_not_a_historical_label (test_baselines.BaselineTests.test_future_availability_is_not_a_historical_label) ... ok
+test_push_mask_is_target_week_local_and_end_exclusive (test_enhanced.EnhancedTests.test_push_mask_is_target_week_local_and_end_exclusive) ... ok
+test_suspect_uses_only_prior_reference_and_other_activity (test_enhanced.EnhancedTests.test_suspect_uses_only_prior_reference_and_other_activity) ... ok
+test_thread_activity_excludes_self_and_future (test_enhanced.EnhancedTests.test_thread_activity_excludes_self_and_future) ... ok
+test_age_weights_have_six_week_half_life (test_calibration.CalibrationTests.test_age_weights_have_six_week_half_life) ... ok
+test_blend_is_bounded_and_has_expected_endpoints (test_calibration.CalibrationTests.test_blend_is_bounded_and_has_expected_endpoints) ... ok
+test_frequency_counts_weeks_and_blocks_future_availability (test_calibration.CalibrationTests.test_frequency_counts_weeks_and_blocks_future_availability) ... ok
+test_labels_must_finish_before_four_hour_cutoff (test_calibration.CalibrationTests.test_labels_must_finish_before_four_hour_cutoff) ... ok
+test_recent_window_retains_only_last_twelve_origins (test_calibration.CalibrationTests.test_recent_window_retains_only_last_twelve_origins) ... ok
+test_frozen_push_frequency_ignores_later_calendar_staleness (test_coverage_dynamic.CoverageDynamicTests.test_frozen_push_frequency_ignores_later_calendar_staleness) ... ok
+test_latest_complete_window_is_included_without_future_labels (test_coverage_dynamic.CoverageDynamicTests.test_latest_complete_window_is_included_without_future_labels) ... ok
+test_rank_ties_are_stable_and_counts_exact (test_coverage_dynamic.CoverageDynamicTests.test_rank_ties_are_stable_and_counts_exact) ... ok
+test_received_and_peer_activity_excludes_self_and_future (test_coverage_dynamic.CoverageDynamicTests.test_received_and_peer_activity_excludes_self_and_future) ... ok
+test_reviewed_repo_counts_only_visible_new_prs (test_coverage_dynamic.CoverageDynamicTests.test_reviewed_repo_counts_only_visible_new_prs) ... ok
+test_target_label_exclusion_only_changes_push_head (test_coverage_dynamic.CoverageDynamicTests.test_target_label_exclusion_only_changes_push_head) ... ok
+test_calibration_hybrid_keeps_or_improves_starting_score (test_hybrid_production.HybridProductionTests.test_calibration_hybrid_keeps_or_improves_starting_score) ... ok
+test_failed_format_validation_preserves_existing_final_file (test_hybrid_production.HybridProductionTests.test_failed_format_validation_preserves_existing_final_file) ... ok
+test_force_cannot_include_records_after_official_cutoff (test_hybrid_production.HybridProductionTests.test_force_cannot_include_records_after_official_cutoff) ... ok
+test_force_uses_observed_feature_clock_and_complete_training_cutoff (test_hybrid_production.HybridProductionTests.test_force_uses_observed_feature_clock_and_complete_training_cutoff) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 2.962s
+
+OK

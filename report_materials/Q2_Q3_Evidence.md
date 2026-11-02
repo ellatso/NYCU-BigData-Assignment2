@@ -16,11 +16,11 @@ Additional signals:
 - Seven-day observed activity in the user's repos, excluding the user.
 - Seven-day activity of direct cohort collaborators.
 
-The 32 additional features produce a 50.12% evaluation Score versus 50.40% for temporal inputs and basic user/repo joins. Calibration also favors the temporal candidate. Keep the extra features as an ablation rather than claiming a gain. The older relation features already included 30-day aggregates, so their earlier failure cannot be attributed solely to being static.
+Before rule mixing, the 32 additional features score 50.12% versus temporal 50.40%. With the same calibration-only mixing procedure, temporal reaches 52.25% and relations 53.17% on reused development weeks. Temporal mixing leads calibration at 47.49% versus 47.41%. Keep both fixed for a fresh forward comparison; do not claim statistical equivalence or relabel this tree-based aggregation as a GNN. The older relation features already included 30-day aggregates.
 
 ### Mandarin narration
 
-我先用外鍵把不同活動表連到使用者與 repo，基本模型也有 repo 多樣性，所以不能說它完全沒有使用跨表關係。我另外加入 32 個更直接反映近期互動的特徵，例如自己開的 PR 最近收到多少 review，以及曾經 review 的 repo 最近又出現多少新 PR。所有計算都只用當下可見的資料，並扣除自己的事件。這些特徵確實有非零樣本，但在相同評估週沒有改善，所以我保留這組消融，不為了讓報告看起來有改進而換成較差的方法。
+我先用外鍵把不同活動表連到使用者與 repo，基本模型也有 repo 多樣性，所以不能說它完全沒有使用跨表關係。我另外加入 32 個更直接反映近期互動的特徵，例如自己開的 PR 最近收到多少 review，以及曾經 review 的 repo 最近又出現多少新 PR。所有計算都只用當下可見的資料，並扣除自己的事件。原先只用 threshold 時關聯版本沒有改善；加入上週規則的混合後，時間版本是 52.25%，關聯版本是 53.17%。這讓關聯版本值得保留為候選，但這些週已經被看過，所以我固定兩個版本，等待新的完整週比較，不把開發分數冒充新的測試結果。
 
 ## Q3: time and calibration
 
@@ -45,8 +45,10 @@ The 32 additional features produce a 50.12% evaluation Score versus 50.40% for t
 | Temporal plus top-k positive rate | 50.61% |
 | Earlier relation features plus thresholds | 50.31% |
 | Dynamic relations plus thresholds | 50.12% |
+| Temporal probability mixture | 52.25% |
+| Relational probability mixture | 53.17% |
 
-The last-week rule leads on evaluation, but loses on calibration: 43.93% versus 45.65%. This replaces the old broad claim that the learned temporal model beats the simple rule. The evaluation dates have been used in development and are not an untouched final test.
+The rule beats the original classifier, but both probability mixtures exceed the rule on reused development weeks. Calibration selects temporal mixing, 47.49% versus rule 43.93%. These dates are development evidence, not an untouched final test. Micro-F1 weakness is target-specific: the original model has too many comment false positives, so uniformly lowering thresholds is not justified.
 
 ## Push coverage and fallback
 
@@ -58,8 +60,8 @@ The frequency method is worse with healthy data or a two-day gap, so the automat
 
 ## Final refit
 
-The final command refreshes the official data and refits on completed windows. With the final Nov11 release, an additional origin at Nov4 Taiwan midnight can be included without using future labels. Flagged push outcome weeks are omitted only from push-head training. The program checks data freshness and exact test-ID/binary format. The current snapshot is refused for a final Nov12 CSV.
+The final command refreshes the official data and refits on completed windows. With the final Nov11 release, an additional origin at Nov4 Taiwan midnight can be included without using future labels. Flagged push outcome weeks are omitted only from push-head training. The program checks data freshness and exact test-ID/binary format. The normal final path rejects stale releases. Explicit backup mode (--force, optionally --no-refit) still produces a format-checked early CSV, using observed feature dates and atomic writes. The November2 hybrid backup passed official checks for 3,960 users and has not been uploaded to E3. Plan an early Nov10 submission, verify E3 replacement behavior and the upload receipt, then refresh after the final release.
 
 ## Evidence
 
-See `artifacts_coverage_20261102/REPORT.md`, `metrics.csv`, `weekly_zero_days.csv`, `push_dropout_stress.csv`, `production_checks.json` and `TA_question_zh.md`. The revised PDF uses plain-language captions and one connected 30-node entity graph with each user shown once.
+See `artifacts_hybrid_20261102/REPORT.md`, `selection.json`, `target_diagnostics.csv`, and `artifacts_coverage_20261102/REPORT.md`, `metrics.csv`, `weekly_zero_days.csv`, `push_dropout_stress.csv`, `production_checks.json` and `TA_question_zh.md`. The revised PDF uses plain-language captions and one connected 30-node entity graph with each user shown once.

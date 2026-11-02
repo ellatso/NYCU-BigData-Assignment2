@@ -2,7 +2,13 @@
 
 Author: Chen Jhen Tso (113700058). Individual assignment, Fall 2026.
 
-## Current coverage-aware report
+## Rule-mixture follow-up and early backup
+
+The [new mixture and backup report](artifacts_hybrid_20261102/REPORT.md) updates the earlier model-selection discussion. On the same reused development weeks, temporal probability mixing reaches **52.25%**, relational mixing **53.17%**, and the last-week rule **51.37%**. Temporal mixing leads calibration (47.49% versus relational 47.41%). These are development diagnostics, not fresh test scores; all four mixture configurations are frozen for a new complete, coverage-screened forward comparison. The production recipe changes only when a hybrid configuration is explicitly supplied.
+
+`predict --force` can produce an early backup despite freshness warnings, while retaining mandatory format and ID checks. `--no-refit` adds a fast saved-weight mode. Backups use actual observed feature dates, separate folders and atomic CSV writes. A quick November2 backup for all 3,960 test users passed the official evaluator; it has **not** been uploaded to E3. Use the report's commands for the planned Nov10 backup and Nov11 refresh.
+
+## Earlier coverage-aware report
 
 The [coverage correction and shared-period report](artifacts_coverage_20261102/REPORT.md) supersedes the earlier October model comparisons. Oct8 has a zero line-comment day; Oct15 and Oct22 have zero push days. The main comparison now uses Sep24 and Oct1 origins for every method. These weeks passed zero-record-day screening, which does not establish complete collection.
 
@@ -32,6 +38,7 @@ For local execution (from this folder):
 python -m pip install -r requirements.txt
 git clone --depth 1 https://github.com/nycubigdata-2026fall/BigData2026-Assignment2.git ../assignment2_data
 python scripts/experiment_coverage.py --data ../assignment2_data
+python scripts/experiment_hybrid.py
 python scripts/checks.py --data ../assignment2_data --out artifacts_coverage_20261102
 python scripts/graphs.py --data ../assignment2_data --out artifacts/graphs
 ```

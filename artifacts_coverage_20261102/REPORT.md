@@ -1,5 +1,7 @@
 # Coverage correction, dynamic relations and push fallback
 
+Update: [the rule-mixture and backup follow-up](../artifacts_hybrid_20261102/REPORT.md) adds new development results and an explicit early-output override. The original measured comparisons below remain unchanged.
+
 This report replaces the earlier primary model comparisons. The old results remain archived as scores against supplied records, but their coverage-affected weeks must not support claims of reliable future behavior.
 
 ## Advice adopted and qualified

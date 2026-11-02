@@ -61,3 +61,16 @@ def complete_training_origins(start,observation_cutoff,include_latest=True):
     dates=list(pd.date_range(stamp(start),latest,freq='7D'))
     if include_latest and latest>=stamp(start) and latest not in dates:dates.append(latest)
     return sorted(t for t in dates if t+pd.Timedelta(days=7)<=cutoff)
+
+def prediction_cutoffs(latest_record,force=False):
+    """An early backup ends its feature clock at observed data, never at Nov11."""
+    target=stamp('2026-11-12T00:00:00+08:00')
+    official_cutoff=target-pd.Timedelta(hours=4)
+    latest=stamp(latest_record)
+    if pd.isna(latest):raise ValueError('No observed activity records')
+    stale=latest<official_cutoff-pd.Timedelta(hours=2)
+    if stale and not force:
+        raise ValueError('Official final predictions require the final Nov11 release. Use --force for a clearly labeled early backup.')
+    feature_cutoff=min(official_cutoff,latest+pd.Timedelta(nanoseconds=1)) if force else official_cutoff
+    return dict(target=target,feature_cutoff=feature_cutoff,
+        training_cutoff=min(feature_cutoff,latest),stale=bool(stale),backup=bool(force))

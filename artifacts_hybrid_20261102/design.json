@@ -1,0 +1,29 @@
+{
+  "calibration_origins": [
+    "2026-08-19 16:00:00",
+    "2026-09-09 16:00:00"
+  ],
+  "evaluation_origins": [
+    "2026-09-23 16:00:00",
+    "2026-09-30 16:00:00"
+  ],
+  "candidates": [
+    "temporal_switch",
+    "temporal_blend",
+    "dynamic_switch",
+    "dynamic_blend"
+  ],
+  "selection": "Mean weekly six-target Score on calibration only",
+  "grid": {
+    "weights": [
+      0,
+      0.25,
+      0.5,
+      0.75,
+      1
+    ],
+    "thresholds": "Keep original thresholds as starting candidates; search 0.1 to 0.7 by 0.05"
+  },
+  "warning": "Added after seeing Sep24/Oct1 results. All resulting evaluation comparisons are development diagnostics. Freeze any challenger for a future complete week.",
+  "production_adoption": "Do not automatically replace current model on reused evaluation results"
+}
