@@ -2,9 +2,17 @@
 
 Author: Chen Jhen Tso (113700058). Individual assignment, Fall 2026.
 
-## November 2 audit and baseline rerun
+## Current coverage-aware report
 
-See [the measured audit report](artifacts_20261102/REPORT.md) for the latest data integrity checks, reproduced baselines, Oct22 retrospective scores, official-roster validation and the explicit-ID inference fix. The latest release has suspicious target-specific coverage gaps (notably no recorded pushes after Oct26); recent scores are provisional. Oct29 outcomes remain pending. No final November submission has been generated.
+The [coverage correction and shared-period report](artifacts_coverage_20261102/REPORT.md) supersedes the earlier October model comparisons. Oct8 has a zero line-comment day; Oct15 and Oct22 have zero push days. The main comparison now uses Sep24 and Oct1 origins for every method. These weeks passed zero-record-day screening, which does not establish complete collection.
+
+On the shared evaluation, the last-week rule scores 51.37%, the calibration-selected temporal threshold model 50.40%, and dynamic relations 50.12%. The temporal threshold method wins calibration at 45.65% versus the rule's 43.93%. No evaluation-based switching is claimed. Dynamic relations and top-k are tested alternatives, not automatically adopted.
+
+The production path refits on completed historical windows, includes the latest extra Taiwan-midnight origin, excludes flagged push-label weeks for the push head, checks release freshness and supports a conditional, stress-tested push fallback. It refuses a stale final prediction without a validated fallback configuration. The next outcome week remains unscored, and no final November CSV is generated.
+
+## Archived November 2 experiments
+
+See [the measured audit report](artifacts_20261102/REPORT.md) for the earlier data integrity checks, reproduced baselines, Oct22 retrospective scores, official-roster validation and the explicit-ID inference fix. The latest release has suspicious target-specific coverage gaps (notably no recorded pushes after Oct26); recent scores are provisional. Oct29 outcomes remain pending. No final November submission has been generated.
 
 The [second-round feature and push-coverage experiment](artifacts_v2_20261102/REPORT.md) compares six fixed recipes. Short-term features did not consistently improve the original baseline; thread features were too sparse to be used by the fitted trees. The original submission path remains unchanged.
 
@@ -16,15 +24,15 @@ This repository contains measured CPU baselines and a temporal relational graph 
 
 ## Quick start
 
-The accompanying `Asg2_Start.ipynb` is self-contained: import into Kaggle/Colab, keep Internet on, and Run All. GPU is not needed. It writes this project outside the downloaded instructor-data folder and runs the benchmark, checks and graph extraction. First-run package installation/download and machine speed determine runtime; no specific runtime is guaranteed.
+The notebooks run the archived original protocol; use the local commands below to reproduce the revised coverage-aware comparison. The accompanying `Asg2_Start.ipynb` is self-contained: import into Kaggle/Colab, keep Internet on, and Run All. GPU is not needed. It writes this project outside the downloaded instructor-data folder and runs the benchmark, checks and graph extraction. First-run package installation/download and machine speed determine runtime; no specific runtime is guaranteed.
 
 For local execution (from this folder):
 
 ```powershell
 python -m pip install -r requirements.txt
 git clone --depth 1 https://github.com/nycubigdata-2026fall/BigData2026-Assignment2.git ../assignment2_data
-python -m asg2.run benchmark --data ../assignment2_data --out artifacts
-python scripts/checks.py --data ../assignment2_data --out artifacts
+python scripts/experiment_coverage.py --data ../assignment2_data
+python scripts/checks.py --data ../assignment2_data --out artifacts_coverage_20261102
 python scripts/graphs.py --data ../assignment2_data --out artifacts/graphs
 ```
 
@@ -32,7 +40,7 @@ Graph extraction always writes DOT. SVG rendering requires Graphviz's `dot` exec
 
 Per-user historical prediction CSVs are kept locally and are not published here. Public evidence consists of aggregate metrics, split protocols, data hashes, checks and the assignment-required graph visualizations. Running the code generates your own local prediction files.
 
-## What has actually run
+## Archived original experiment (coverage limitations)
 
 The baseline was run on the instructor snapshot whose latest observed row timestamp is **2026-10-22 11:59:23 UTC**. `artifacts/data_manifest.json` records SHA256 for all eight files. Every parquet is read with a column allowlist. The six known-only-later fields are excluded from modeling entirely.
 
@@ -82,15 +90,15 @@ Thresholds are calibrated using the exact `(macro_F1 + micro_F1)/2` objective, i
 
 ## Final submission is not generated yet
 
-Official `test_input.csv` is scheduled for Oct28. The final data release is Nov11 at 21:00 Taiwan (through 20:00); deadline is Nov11 23:55. Never submit the historical holdout CSVs as final predictions.
+Official `test_input.csv` is available; the verified roster contains 3,960 users. The final data release is Nov11 at 21:00 Taiwan (through 20:00); deadline is Nov11 23:55. Never submit the historical holdout CSVs as final predictions.
 
 After final model/threshold choice is frozen and the last data release is available:
 
 ```powershell
-python -m asg2.run predict --data ../assignment2_data --out artifacts --input ../assignment2_data/evaluation/test_input.csv --student-id 113700058
+python -m asg2.run predict --data ../assignment2_data --out artifacts_coverage_20261102 --input ../assignment2_data/evaluation/test_input.csv --push-policy-config artifacts_coverage_20261102/fallback_config.json --student-id 113700058
 ```
 
-This refits the calibration-selected variant using complete historical windows from the final snapshot, keeps calibrated thresholds, writes `artifacts/output_113700058.csv`, and invokes the official evaluator with the exact test-user list. The final refit path is implemented but cannot be executed/validated against future November data today. The program refuses an October snapshot for official final prediction. Final model rankings/thresholds may change after justified development experiments; document any change and evaluate on a fresh forward holdout.
+This refits the calibration-selected variant using complete historical windows from the final snapshot, keeps calibrated thresholds, writes `artifacts_coverage_20261102/output_113700058.csv`, and invokes the official evaluator with the exact test-user list. The final refit path is implemented but cannot be executed/validated against future November data today. The program refuses an October snapshot for official final prediction. Final model rankings/thresholds may change after justified development experiments; document any change and evaluate on a fresh forward holdout.
 
 You still need a public GitHub repository, English slides using the teacher's template (<=10 pages, Q1-Q4), and a personally narrated 8-12 minute MP4. No AI-generated presentation video. Model/slide claims must match actual implementation and saved outputs.
 

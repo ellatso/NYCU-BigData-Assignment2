@@ -10,13 +10,16 @@ class Constant:
     def __init__(self,p):self.p=p
     def predict_proba(self,X):return np.tile([1-self.p,self.p],(len(X),1))
 
-def fit_models(X,y,columns,trees=160):
+def fit_models(X,y,columns,trees=160,target_masks=None):
     models=[]
     for j,kind in enumerate(TARGETS):
-        if len(np.unique(y[:,j]))<2:m=Constant(float(y[:,j].mean()))
+        keep=np.ones(len(X),dtype=bool) if target_masks is None or kind not in target_masks else np.asarray(target_masks[kind],dtype=bool)
+        if not keep.any():raise ValueError(f'No usable training labels for {kind}')
+        yy=y[keep,j]
+        if len(np.unique(yy))<2:m=Constant(float(yy.mean()))
         else:
             m=LGBMClassifier(n_estimators=trees,learning_rate=.045,num_leaves=23,max_depth=-1,min_child_samples=70,reg_lambda=4,subsample=.85,subsample_freq=1,colsample_bytree=.85,random_state=42,n_jobs=4,verbosity=-1)
-            m.fit(X[columns],y[:,j])
+            m.fit(X.loc[keep,columns],yy)
         models.append(m)
     return models
 
@@ -103,33 +106,42 @@ def benchmark(args):
     print(df[df.split=='holdout'].to_string(index=False))
 
 def final_predict(args):
+    from .coverage import complete_training_origins,push_status,push_frequency
+    from .enhanced import suspect_push_days,push_training_mask
     out=Path(args.out);protocol=json.loads((out/'protocol.json').read_text());variant=protocol['selected_by_calibration_only']
     with (out/f'model_{variant}.pkl').open('rb') as f:chosen=pickle.load(f)
     tables=load_tables(args.data);events=build_events(tables)
     ids=pd.read_csv(args.input).UserID.to_numpy()
     target=stamp('2026-11-12 00:00:00+08:00');observation_end=target-pd.Timedelta(hours=4)
-    if events.available_at.max()<pd.Timestamp('2026-11-11 11:00:00'):
+    if events.available_at.max()<observation_end-pd.Timedelta(hours=2):
         raise ValueError('Official final predictions require the final Nov11 release. Do not submit an October dry run.')
     # Refitting includes only complete outcome windows before the observation cutoff.
     start=protocol['train_origins'][0]
-    origins=pd.date_range(start,target-pd.Timedelta(days=7),freq='7D')
-    origins=origins[origins+pd.Timedelta(days=7)<=observation_end]
+    origins=complete_training_origins(start,observation_end)
     manifest=fingerprint(args.data);digest=hashlib.sha256(json.dumps(manifest,sort_keys=True).encode()).hexdigest()[:16]
     cache=out/'cache'/digest;cache.mkdir(parents=True,exist_ok=True)
     X,y=make_samples(tables,events,origins,cache,4)
-    cols=chosen['columns'];models=fit_models(X,y,cols,args.trees)
+    pushmask=push_training_mask(X.origin,suspect_push_days(events))
+    cols=chosen['columns'];models=fit_models(X,y,cols,args.trees,target_masks={'push':pushmask})
     Xtest=features(tables,events,target,user_ids=ids,gap_hours=4)
     pred=predict(models,Xtest,cols)>=chosen['thresholds']
+    policy=json.loads(Path(args.push_policy_config).read_text()) if args.push_policy_config else None
+    status=push_status(events,observation_end,stale_hours=policy.get('stale_hours',48) if policy else 48)
+    if status['coverage_warning']:print('PUSH COVERAGE WARNING:',status,flush=True)
+    if status['fallback_recommended']:
+        if not args.push_policy_config:raise ValueError('Push coverage is stale. Supply a validated --push-policy-config; refusing silent stale-recency predictions.')
+        if not policy.get('validated_for_use',False):raise ValueError('Push fallback policy has not passed its stress-test adoption rule')
+        pred[:,-1]=push_frequency(events,tables,observation_end,Xtest.UserID,freeze_clock=True)>=policy['threshold']
     df=pd.DataFrame(pred.astype('int8'),columns=TARGETS);df.insert(0,'UserID',Xtest.UserID.to_numpy())
     destination=out/f'output_{args.student_id}.csv';df.to_csv(destination,index=False)
     # Run the OFFICIAL evaluator, which checks both header and exact user set.
     cmd=['python',str(Path(args.data)/'evaluation/evaluate.py'),'--pred',str(destination),'--input',args.input]
     subprocess.run(cmd,check=True)
-    (out/'final_protocol.json').write_text(json.dumps({'model':variant,'target_start_utc':str(target),'feature_cutoff_utc':str(observation_end),'refit_origins':[str(t) for t in origins],'thresholds_from_historical_calibration':chosen['thresholds'].tolist(),'data_manifest':manifest},indent=2))
+    (out/'final_protocol.json').write_text(json.dumps({'model':variant,'target_start_utc':str(target),'feature_cutoff_utc':str(observation_end),'refit_origins':[str(t) for t in origins],'push_training_rows_excluded':int((~pushmask).sum()),'push_coverage':status,'push_fallback_used':status['fallback_recommended'],'thresholds_from_historical_calibration':chosen['thresholds'].tolist(),'data_manifest':manifest},indent=2))
     print('Official-format prediction file:',destination)
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('action',choices=['benchmark','predict']);p.add_argument('--data',required=True);p.add_argument('--out',default='artifacts');p.add_argument('--train-start',default='2026-05-07');p.add_argument('--trees',type=int,default=160);p.add_argument('--gap-hours',type=int,default=4);p.add_argument('--input');p.add_argument('--student-id',default='113700058')
+    p=argparse.ArgumentParser();p.add_argument('action',choices=['benchmark','predict']);p.add_argument('--data',required=True);p.add_argument('--out',default='artifacts');p.add_argument('--train-start',default='2026-05-07');p.add_argument('--trees',type=int,default=160);p.add_argument('--gap-hours',type=int,default=4);p.add_argument('--input');p.add_argument('--student-id',default='113700058');p.add_argument('--push-policy-config')
     a=p.parse_args()
     if a.action=='predict' and not a.input:p.error('--input is required for predict')
     benchmark(a) if a.action=='benchmark' else final_predict(a)

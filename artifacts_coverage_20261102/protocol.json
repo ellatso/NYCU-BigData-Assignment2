@@ -1,0 +1,31 @@
+{
+  "train_origins": [
+    "2026-05-06 16:00:00",
+    "2026-05-13 16:00:00",
+    "2026-05-20 16:00:00",
+    "2026-05-27 16:00:00",
+    "2026-06-03 16:00:00",
+    "2026-06-10 16:00:00",
+    "2026-06-17 16:00:00",
+    "2026-06-24 16:00:00",
+    "2026-07-01 16:00:00",
+    "2026-07-08 16:00:00",
+    "2026-07-15 16:00:00",
+    "2026-07-22 16:00:00",
+    "2026-07-29 16:00:00",
+    "2026-08-05 16:00:00"
+  ],
+  "calibration_origins": [
+    "2026-08-19 16:00:00",
+    "2026-09-09 16:00:00"
+  ],
+  "holdout_origins": [
+    "2026-09-23 16:00:00",
+    "2026-09-30 16:00:00"
+  ],
+  "observation_gap_hours": 4,
+  "selected_by_calibration_only": "temporal",
+  "threshold_objective": "Mean of the two per-week official combined Scores",
+  "selected_candidate": "temporal_mean_threshold",
+  "warning": "Common screened historical development weeks, not confirmed complete collection or official test performance"
+}

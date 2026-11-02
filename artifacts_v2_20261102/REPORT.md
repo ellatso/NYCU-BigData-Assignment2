@@ -1,3 +1,5 @@
+> **Coverage correction (Nov2):** These archived scores use weeks with target-specific coverage warnings. Use [the corrected common-period report](../artifacts_coverage_20261102/REPORT.md) for primary comparisons. Do not infer reliable future-performance gains or attribute all declines to thresholds from these tables alone.
+
 # Second-round temporal features and push-coverage sensitivity
 
 Executed 2026-11-02 on the same Nov1 official data snapshot as the baseline audit. All results below are historical development diagnostics against supplied records. No official November prediction or score is claimed.

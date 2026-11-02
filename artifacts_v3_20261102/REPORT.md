@@ -1,3 +1,5 @@
+> **Coverage correction (Nov2):** These archived scores use weeks with target-specific coverage warnings. Use [the corrected common-period report](../artifacts_coverage_20261102/REPORT.md) for primary comparisons. Do not infer reliable future-performance gains or attribute all declines to thresholds from these tables alone.
+
 # Multiweek calibration, recent training and frequency blending
 
 Executed November 2, 2026. All scores are historical development diagnostics, not official November test scores. The data snapshot is unchanged from the first audit. Oct29–Nov5 remains unscored.

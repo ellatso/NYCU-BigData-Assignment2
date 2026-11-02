@@ -1,0 +1,15 @@
+{
+  "selected_by_calibration": "temporal_mean_threshold",
+  "calibration_scores": {
+    "temporal_mean_threshold": 0.45648121021913596,
+    "temporal_rank_prevalence": 0.41643312501357976,
+    "previous_relational_mean_threshold": 0.4534086693997681,
+    "previous_relational_rank_prevalence": 0.41519818574557493,
+    "dynamic_relational_mean_threshold": 0.4553373052973854,
+    "dynamic_relational_rank_prevalence": 0.41520953161250507,
+    "last_week_rule": 0.439254995654264
+  },
+  "historical_training_rows": 115448,
+  "policy": "No evaluation-based switching",
+  "status": "Historical method comparison; final refit required"
+}

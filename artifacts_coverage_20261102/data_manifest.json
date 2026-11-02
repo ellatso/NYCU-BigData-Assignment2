@@ -1,0 +1,34 @@
+{
+  "Users": {
+    "sha256": "fe48fec0989e032d6caa07c725dcf03bb14c561e4b4615b37713177d5c444349",
+    "bytes": 1275539
+  },
+  "Repositories": {
+    "sha256": "8d92d9e72ebfa52282435234caa2e8904bf46d21a50ef9495240e0b05636bafa",
+    "bytes": 4389065
+  },
+  "PullRequests": {
+    "sha256": "1b546070dc1d8cccb66aedb27d847d247057d8cbadc75883f343aa2401fb3ef8",
+    "bytes": 27132318
+  },
+  "Issues": {
+    "sha256": "208252fa32e52391c668f74a940feda4b10ae3c13f617a5e7546c3dbeb57edd6",
+    "bytes": 68171304
+  },
+  "IssueComments": {
+    "sha256": "a1a5d6ff0d07b01f65390c10e702c259131354690f68dffc82aac533b2aa8476",
+    "bytes": 19191260
+  },
+  "PRReviews": {
+    "sha256": "10772ce0f80a27303007bd67d0e62481542dd9e5214bdbde4b9705e849eac85e",
+    "bytes": 7577849
+  },
+  "PRReviewComments": {
+    "sha256": "e6006528aaaa543d731d90f3c23218e4a5fe7e6c716f60c480847dee62d82a24",
+    "bytes": 21379598
+  },
+  "Pushes": {
+    "sha256": "20e911196afd519f35ca915977032158ff43463f3a3d345979989bc839f0a6b3",
+    "bytes": 43301671
+  }
+}

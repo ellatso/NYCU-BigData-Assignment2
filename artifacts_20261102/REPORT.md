@@ -1,3 +1,5 @@
+> **Coverage correction (Nov2):** These archived scores use weeks with target-specific coverage warnings. Use [the corrected common-period report](../artifacts_coverage_20261102/REPORT.md) for primary comparisons. Do not infer reliable future-performance gains or attribute all declines to thresholds from these tables alone.
+
 # Data audit and baseline rerun — 2026-11-02
 
 Completed against official release `cfe57edec97a4c4408053a71fd0fdb9d746930dc` (Nov 1). This is a historical experiment, not the November submission score. Source project: `8fa06c6` plus the explicit-ID mapping fix in this branch.

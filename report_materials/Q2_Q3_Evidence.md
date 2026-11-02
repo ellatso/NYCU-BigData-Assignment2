@@ -1,120 +1,65 @@
-# Q2 and Q3 presentation content
+# Updated Q2 and Q3 presentation evidence
 
-English slide copy with Mandarin narration notes. These are draft content blocks to place in the instructor's template. They are not the final presentation PDF. Use no more than ten slides overall and personally record the 8–12 minute video.
+This replaces the earlier mixed-date content. The main PDF uses the same evaluation origins, Sep24 and Oct1, for all method comparisons. All scores are historical, with collection completeness unconfirmed.
 
-## Q2 slide: Relational modeling
+## Q2: recent interactions across linked tables
 
 ### English slide copy
 
-**Relational modeling**
+The retained model joins activity actors to users and repositories, and includes repository diversity. Additional neighborhood features are evaluated separately.
 
-- Join activity actors to repositories through the supplied foreign keys.
-- Aggregate activity from other participants in the same repositories, excluding the target user's own event counts.
-- Join comments and reviews to issue or PR authors to measure received interactions and distinct partners.
-- Compare feature aggregation with an explicit user/repository message-passing model.
+Cross-table interaction flow: comment/review actor, linked PR or issue, author. Count received events and distinct partners over 3/7 days, with self interactions removed.
 
-| Comparison on the original two diagnostic weeks | Combined Score |
+Additional signals:
+
+- New PRs by others in the last three days on repos the user reviewed.
+- Seven-day observed activity in the user's repos, excluding the user.
+- Seven-day activity of direct cohort collaborators.
+
+The 32 additional features produce a 50.12% evaluation Score versus 50.40% for temporal inputs and basic user/repo joins. Calibration also favors the temporal candidate. Keep the extra features as an ablation rather than claiming a gain. The older relation features already included 30-day aggregates, so their earlier failure cannot be attributed solely to being static.
+
+### Mandarin narration
+
+我先用外鍵把不同活動表連到使用者與 repo，基本模型也有 repo 多樣性，所以不能說它完全沒有使用跨表關係。我另外加入 32 個更直接反映近期互動的特徵，例如自己開的 PR 最近收到多少 review，以及曾經 review 的 repo 最近又出現多少新 PR。所有計算都只用當下可見的資料，並扣除自己的事件。這些特徵確實有非零樣本，但在相同評估週沒有改善，所以我保留這組消融，不為了讓報告看起來有改進而換成較差的方法。
+
+## Q3: time and calibration
+
+### English slide copy
+
+- Original temporal family: lifetime counts and age, multi-window counts, active days, repo diversity, per-target recency and trends. Total: 51 inputs.
+- Event occurrence and row availability must both precede the feature cutoff.
+- Every origin has a four-hour observation gap and a seven-day outcome horizon.
+- Train on May7–Aug6 origins. Calibrate on Aug20 and Sep10. Evaluate on Sep24 and Oct1.
+- Choose thresholds by mean per-week calibration Score. Compare top-k using mean calibration positive rates.
+
+### Mandarin narration
+
+這一版重新統一了比較範圍。訓練、校準與評估嚴格依時間分開，而且前一階段的完整標籤必須在下一階段的觀測截止時間前結束。校準不再只看一週，而是最大化兩個校準週 Score 的平均。top-k 也有比較，但它雖然在評估資料略高，校準表現較差，所以不能看完評估分數才改選它。
+
+## Main comparison
+
+| Method | Same-period six-target Score |
 |---|---:|
-| Temporal tree model | 50.17% |
-| Temporal plus relational tree features | 49.79% |
-| User MLP, earlier neural experiment | 48.23% |
-| Relational GNN, earlier neural experiment | 48.52% |
+| Last-week rule | 51.37% |
+| Temporal plus mean-week thresholds | 50.40% |
+| Temporal plus top-k positive rate | 50.61% |
+| Earlier relation features plus thresholds | 50.31% |
+| Dynamic relations plus thresholds | 50.12% |
 
-Relational features did not consistently improve the strongest temporal baseline. The neural pair is a matched message-passing ablation. The tree and neural models have different features.
+The last-week rule leads on evaluation, but loses on calibration: 43.93% versus 45.65%. This replaces the old broad claim that the learned temporal model beats the simple rule. The evaluation dates have been used in development and are not an untouched final test.
 
-### Mandarin narration
+## Push coverage and fallback
 
-我用外鍵把活動、使用者、repo，以及 PR 或 issue 的作者串起來。第一種方式把鄰居的活動聚合成特徵，而且扣掉自己的事件，避免只是把自己的活躍度換個欄位名稱。第二種方式用可訓練的訊息傳遞模型，比較加入關係前後的神經網路。神經網路那組有小幅改善，但沒有超過時間特徵的樹模型，因此我沒有宣稱關係建模一定比較好。
+The official Nov1 release still has no push records after Oct26. Oct15 and Oct22 outcome weeks also contain zero push days, and Oct8 contains a zero line-comment day. These weeks are removed from the primary comparison. A zero count does not prove a missing event.
 
-### Evidence
+Simulated trailing push-feature loss retains the same outcome labels. Mean push F1 at 7/14/21-day loss changes from 55.45/39.99/24.86% to 59.47/61.00/62.98% with frequency measured at the last observed push time. These are push F1 values, not the six-target Score.
 
-- Tree comparison: `artifacts_20261102/metrics.csv`, holdout rows.
-- Neural comparison: `artifacts_step2/metrics.csv`, development_diagnostic rows. This is the earlier measured experiment, not a new GNN rerun in November.
-- Implementation: `asg2/core.py` and `asg2/graph.py`.
+The frequency method is worse with healthy data or a two-day gap, so the automatic fallback waits for at least seven days of staleness. It does not repair historical internal gaps. TA confirmation about backfill and answer coverage is still needed; a draft question is provided in the report directory and has not been posted.
 
-## Q3 slide: Temporal information and availability
+## Final refit
 
-### English slide copy
+The final command refreshes the official data and refits on completed windows. With the final Nov11 release, an additional origin at Nov4 Taiwan midnight can be included without using future labels. Flagged push outcome weeks are omitted only from push-head training. The program checks data freshness and exact test-ID/binary format. The current snapshot is refused for a final Nov12 CSV.
 
-**Temporal information and availability**
+## Evidence
 
-- Predict six activities over a seven-day outcome window.
-- Filter features by event occurrence and row availability before the cutoff.
-- Simulate a four-hour observation gap before each prediction origin.
-- Use 7/14/30/90-day activity counts, recency, active days, repository diversity and recent activity trends.
-- Exclude fields known only later from the model inputs.
-- Keep training outcome windows separate from calibration and evaluation cutoffs.
-
-Original temporal features improve the two-week diagnostic Score from the last-week rule's 46.32% to 50.17%.
-
-### Mandarin narration
-
-時間資訊有兩個層次。第一個是行為規律，例如最近多久活動、不同時間長度的次數，以及近期趨勢。第二個是資訊當時能不能看到。即使某個 issue 很早建立，如果它到後來才出現在資料中，模型在先前時間也不能使用它。我也讓每次回測保留四小時空窗，模擬正式資料更新到晚上八點、預測從午夜開始的條件。
-
-### Evidence
-
-- `artifacts_20261102/protocol.json`, `checks.json` and `metrics.csv`.
-- Known-later fields remain excluded by the column allowlist in `asg2/core.py`.
-
-## Q3 experiment slide: Calibration and training history
-
-### English slide copy
-
-**Calibration and training history**
-
-Four chronological calibration origins: Aug13, Aug27, Sep10 and Sep24.
-
-- Full historical training versus the most recent 12 weeks.
-- Six-week half-life sample weighting.
-- Fixed 0%/25%/50% blends with historical activity frequency.
-
-| Three-week development comparison | Combined Score |
-|---|---:|
-| Established original model | 48.75% |
-| Choice from pooled multiweek calibration | 38.81% |
-| Choice from a later single-week diagnostic | 48.90% |
-
-The later single-week comparison was added after inspecting the initial results. Its choice improves the pooled Score by only 0.16 percentage points and trails the original on two of three weeks.
-
-### Mandarin narration
-
-我把訓練歷史長度、近期權重，以及校準方式分開比較。最初用四個歷史週的時間外預測來選門檻，但選出的模型在開發週表現較差。接著我追加最近單週校準的對照，確認問題不完全來自訓練方式。這個追加診斷的時間點需要說清楚，不能把已經看過的十月資料說成全新的測試。追加選出的候選只小幅增加合併分數，而且三週裡有兩週較差，所以我保留原始模型作為基準。
-
-### Evidence
-
-- `artifacts_v3_20261102/design.json`, `fold_protocol.json`, `metrics.csv`.
-- `diagnostic_amendment.json`, `singleweek_selection.json`, `singleweek_diagnostic_metrics.csv`.
-- Both scores use the same three development origins. The earlier 50.17% uses only Oct8/15, so do not compare 50.17% and 48.75% as if they used the same sample.
-
-## Analysis slide: Coverage limits and model choice
-
-### English slide copy
-
-**Coverage limits and model choice**
-
-- The Nov1 snapshot has no recorded pushes after Oct26, while other targets continue into Nov1.
-- Zero recorded events may reflect inactivity or collection coverage. The data alone do not establish the cause.
-- Additional conversation features are positive in only 8–36 of 148,917 training rows. The fitted trees use none of these features.
-- Preserve the original model and one experimental challenger with fixed weights and thresholds.
-- Keep Oct29–Nov5 unscored until the full outcome horizon and target coverage can be checked.
-
-Current results are historical development diagnostics. The final November prediction file and official score are not available.
-
-### Mandarin narration
-
-資料檢查發現不同活動的最後時間不一致，所以我不會把零紀錄直接當成使用者完全沒有活動。我另外做了排除可疑 push 訓練週的敏感度實驗，但改善很小。新增討論串特徵也因為支援樣本太少，沒有被樹模型使用。最後我保存模型權重與門檻，後續用固定設定驗證，避免看完新結果又一直更改模型。
-
-### Evidence
-
-- `artifacts_20261102/audit.json`, `daily_event_counts.csv` and `event_coverage.csv`.
-- `artifacts_v2_20261102/thread_support.json` and `metrics.csv`.
-- `artifacts_v3_20261102/freeze_decision.json`.
-
-## Consistency checks before recording
-
-- Use the original temporal model as the established reference. Identify the recent12/25% single-week version as experimental.
-- Do not label the tree aggregation model as an end-to-end GNN. The explicit neural model is a separate comparison.
-- Do not describe a 0.16 percentage-point change as a statistically significant gain.
-- Retain the data-coverage caveat near recent results.
-- Update all final-model statements together if a later, documented decision changes the selected model.
-- Include the public GitHub URL in the final deck and use the teacher's slide template.
+See `artifacts_coverage_20261102/REPORT.md`, `metrics.csv`, `weekly_zero_days.csv`, `push_dropout_stress.csv`, `production_checks.json` and `TA_question_zh.md`. The revised PDF uses plain-language captions and one connected 30-node entity graph with each user shown once.

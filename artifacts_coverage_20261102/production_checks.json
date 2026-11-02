@@ -1,0 +1,18 @@
+{
+  "rehearsal_origin": "2026-11-02T00:00:00+08:00",
+  "format_check": "Format check: no errors (3960 users)",
+  "users": 3960,
+  "exact_id_order": true,
+  "push_status": {
+    "last_observed_push_utc": "2026-10-26 10:06:14",
+    "push_age_hours": 145.8961111111111,
+    "coverage_warning": true,
+    "fallback_recommended": false,
+    "stale_threshold_hours": 168,
+    "latest_observed_record_utc": "2026-11-01 11:56:09",
+    "warning": "Staleness is a coverage warning, not proof of missing records or inactivity."
+  },
+  "november12_final_output_refused_on_november1_data": true,
+  "final_output_generated": false,
+  "latest_planned_training_origin_taiwan": "2026-11-04 00:00:00"
+}
