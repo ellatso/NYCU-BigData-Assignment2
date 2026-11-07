@@ -25,6 +25,7 @@ def stamp(x):
 
 def load_tables(data):
     base=Path(data)/'data/db'
+    if not base.exists():base=Path(data)/'db'
     if not base.exists():base=Path(data)
     tables={t:pd.read_parquet(base/f'{t}.parquet',columns=COLS[t]) for t in TABLES}
     for t,d in tables.items():

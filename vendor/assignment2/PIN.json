@@ -1,0 +1,12 @@
+{
+  "repository": "https://github.com/nycubigdata-2026fall/BigData2026-Assignment2",
+  "commit": "af9f335301d9badb482dfafa10c4534eabac845a",
+  "files": {
+    "scripts/preprocess.py": "e281e4f72f56b1d4e8c8c68b57ba35700f7ad7d720cd7f643e4e132935dde517",
+    "scripts/evaluate.py": "9d18f122f394eda3ab30320cea04ebabc44a1fe28449fc1dff71fb6fb461e5ca",
+    "scripts/cohort.txt": "4d3c38abfaa85928c8c6ee5ccdbaf4c5702c981167f354cdb83258d516d3309c",
+    "submission/test_input.csv": "3bc4f0e2250f44bad45dfcd6dbc9517e0dd4aa5959d9ec11540859e052931f8e",
+    "SCHEMA.md": "7f8c8846b09783e5d1bbfa94515c1992bcdf0c66f9729bf8bca31be90043feb6",
+    "README.md": "2ab38f28579e746742f925b0fee6517992e7cbea8a1105fc19db16411cb62f96"
+  }
+}

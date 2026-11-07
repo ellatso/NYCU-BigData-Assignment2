@@ -188,6 +188,7 @@ def main():
     p.add_argument('--no-refit',action='store_true',help='With --force only: quickly reuse the saved historical weights for an emergency backup')
     p.add_argument('--hybrid-config',help='Explicit fixed hybrid selection JSON; omit to retain the existing production recipe')
     a=p.parse_args()
+    if a.action=='predict':p.error('The legacy Nov12 prediction command is retired. Use python -m asg2.revised predict --help for the Nov22 task and newly preprocessed data.')
     if a.action=='predict' and not a.input:p.error('--input is required for predict')
     benchmark(a) if a.action=='benchmark' else final_predict(a)
 
