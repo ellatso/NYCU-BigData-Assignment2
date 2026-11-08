@@ -70,9 +70,10 @@ ROW_TIME = {'Users': 'first_seen_at', 'Repositories': 'first_seen_at', 'PullRequ
             'PRReviewComments': 'created_at', 'Pushes': 'created_at'}
 
 
-def schema_graph(out, counts):
+def schema_graph(out, counts, wide=False):
     color = {'Users': '#cde2fb', 'Repositories': '#cde2fb'}
-    lines = ['digraph schema {', 'graph [rankdir=LR, bgcolor="#fcfcfb", nodesep=0.35, ranksep=1.1, fontname="DejaVu Sans", pad=0.2];',
+    graph_attr = ('nodesep=0.12, ranksep=1.6, ratio=fill, size="11,5.3!"' if wide else 'nodesep=0.35, ranksep=1.1')
+    lines = ['digraph schema {', f'graph [rankdir=LR, bgcolor="#fcfcfb", {graph_attr}, fontname="DejaVu Sans", pad=0.2];',
              'node [shape=plain, fontname="DejaVu Sans", fontsize=11];', 'edge [color="#52514e", arrowsize=0.7, penwidth=1.1, fontname="DejaVu Sans", fontsize=9, fontcolor="#52514e"];']
     for t, (pk, fks) in SCHEMA.items():
         head = color.get(t, '#e8e7e2')
@@ -161,14 +162,14 @@ def prevalence_lines(out, prev, design):
         c = S[TARGETS.index(t)]
         ax.plot(p.week, p[t] * 100 if False else p[t], color=c, lw=2, marker='o', ms=6, mec=SURF, mew=1.5, label=t)
     ax.yaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0))
-    ax.set_ylim(0, .74); ax.set_ylabel('share of cohort users with the activity in the week')
+    ax.set_ylim(0, .74); ax.set_ylabel('share of users with the activity')
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d')); ax.set_xticks(pd.to_datetime(p.origin_tw))
-    ax.set_xlim(p.week.iloc[0] - pd.Timedelta(days=1), p.week.iloc[-1] + pd.Timedelta(days=7.5))
+    ax.set_xlim(pd.to_datetime(p.origin_tw).iloc[0] - pd.Timedelta(days=.6), p.week.iloc[-1] + pd.Timedelta(days=7.5))
     ax.annotate(f'push {p.push.iloc[-1]:.1%}', (p.week.iloc[-1], p.push.iloc[-1]), xytext=(p.week.iloc[-1] + pd.Timedelta(days=1.2), .16),
                 fontsize=9.5, color=INK2, arrowprops=dict(arrowstyle='-', color=MUTED, lw=.8))
     ax.legend(ncol=6, loc='lower left', bbox_to_anchor=(0, 1.0), fontsize=9.5, handlelength=1.8)
     ax.set_title('Label prevalence drifts by week — thresholds tuned on one regime are applied in another', pad=30)
-    ax.text(0, -.13, 'Each point = one outcome week (shaded span, Thursday 00:00 Taiwan start). Users = cohort users visible before the origin '
+    ax.text(0, -.17, 'Each point = one outcome week (shaded span, Thursday 00:00 Taiwan start). Users = cohort users visible before the origin '
             f'({prev.users.iloc[0]:,} → {prev.users.iloc[-1]:,}).', transform=ax.transAxes, fontsize=9, color=MUTED)
     del order
     save(fig, out, 'q3_label_prevalence')
@@ -244,7 +245,7 @@ def relation_evidence(out, coverage, closure, share):
         a1.text(v + .015, yi, f'{v:.2%}', va='center', fontsize=10)
     a1.set_yticks(yy); a1.set_yticklabels([g.replace('relational: ', '') for g in order]); a1.set_xlim(0, 1.18)
     a1.xaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0, decimals=0)); a1.grid(axis='y', visible=False)
-    a1.set_title('Users with a non-zero feature (week 10/22)', fontsize=11.5)
+    a1.set_title('Users with a non-zero value (10/22)', fontsize=11.5)
     # cohort-closure counts are stated on the slide / in cohort_closure.json
     rel = [g for g in share.columns if g.startswith('relational')]
     data = pd.DataFrame(index=share.index)
@@ -262,7 +263,7 @@ def relation_evidence(out, coverage, closure, share):
     a2.set_yticks(yy); a2.set_yticklabels(data.index); a2.set_xlim(0, 1)
     a2.xaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0, decimals=0)); a2.grid(axis='y', visible=False)
     a2.legend(ncol=3, fontsize=8.5, loc='upper center', bbox_to_anchor=(.5, -.1))
-    a2.set_title(f'Share of LightGBM gain by feature family (submitted model; relational {data["relational (all)"].min():.0%}–{data["relational (all)"].max():.0%})', fontsize=11.5)
+    a2.set_title(f'Gain share by feature family (relational {data["relational (all)"].min():.0%}–{data["relational (all)"].max():.0%})', fontsize=11.5)
     fig.suptitle('Why relations add little here: the cohort-only data rarely contains other people\'s replies', x=.01, ha='left', fontweight='bold', fontsize=12.5)
     fig.tight_layout()
     save(fig, out, 'q2_relation_evidence')
@@ -290,7 +291,7 @@ def reference_week(out, ref):
 
 
 # ---------------------------------------------------------------- Q4 framework
-def framework(out):
+def framework(out, big=False):
     src = r'''digraph framework {
 graph [rankdir=LR, bgcolor="#fcfcfb", fontname="DejaVu Sans", nodesep=0.3, ranksep=0.6, pad=0.25, compound=true];
 node [shape=box, style="rounded,filled", fillcolor="#ffffff", color="#c3c2b7", fontname="DejaVu Sans", fontsize=11, margin="0.15,0.08"];
@@ -321,6 +322,9 @@ subgraph cluster_out { label=<<b>5 · Output</b>>; fontsize=12; color="#c3c2b7";
   rep -> csv -> refit [dir=back]; {rank=same; refit; csv; rep;} }
 db -> ev; asof -> ft; asof -> fr; asof -> fu; ft -> lgb; fr -> lgb; fu -> lgb; lab -> lgb; abl -> refit;
 }'''
+    if big:  # slide version: larger text relative to the canvas
+        src = src.replace('fontsize=11, margin="0.15,0.08"', 'fontsize=15, margin="0.12,0.06"').replace('fontsize=12;', 'fontsize=16;')
+        src = src.replace('nodesep=0.3, ranksep=0.6', 'nodesep=0.18, ranksep=0.35')
     dot(out, 'q4_framework', src)
 
 
@@ -346,7 +350,7 @@ def main():
     if a.data:
         import pyarrow.parquet as pq
         counts = {t: pq.ParquetFile(Path(a.data) / 'db' / f'{t}.parquet').metadata.num_rows for t in SCHEMA}
-    schema_graph(out, counts)
+    schema_graph(out, counts, wide=a.scale != 1.0)
     timeline(out, design, None)
     volume_multiples(out, pd.read_csv(an / 'weekly_volume.csv'), design)
     prevalence_lines(out, pd.read_csv(an / 'weekly_prevalence.csv'), design)
@@ -356,7 +360,7 @@ def main():
     relation_evidence(out, pd.read_csv(an / 'relation_coverage.csv'), json.loads((an / 'cohort_closure.json').read_text()),
                       pd.read_csv(an / 'feature_group_share.csv', index_col=0))
     reference_week(out, pd.read_csv(an / 'reference_week.csv'))
-    framework(out)
+    framework(out, big=a.scale != 1.0)
     print('wrote', out)
 
 
