@@ -11,6 +11,11 @@ import sys
 import tempfile
 import urllib.request
 import urllib.error
+
+# GH Archive's CDN rejects Python's default urllib client signature (HTTP 403, error
+# 1010) while the wget command in the official assignment README works. Identify the
+# client explicitly; this is the documented public download, not a different route.
+USER_AGENT='NYCU-BigData-Assignment2-downloader/1.0 (+https://github.com/ellatso/NYCU-BigData-Assignment2)'
 import zlib
 from collections import Counter
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
@@ -50,7 +55,7 @@ def download(a):
         record=dict(hour_utc=t.isoformat(),url='https://data.gharchive.org/'+name,status='failed')
         fd,tmp=tempfile.mkstemp(prefix='.download_',dir=raw);os.close(fd)
         try:
-            with urllib.request.urlopen(record['url'],timeout=90) as src,open(tmp,'wb') as f:
+            with urllib.request.urlopen(urllib.request.Request(record['url'],headers={'User-Agent':USER_AGENT}),timeout=90) as src,open(tmp,'wb') as f:
                 while True:
                     block=src.read(1024*1024)
                     if not block:break
@@ -97,7 +102,7 @@ def download(a):
                 if t is not None:running[pool.submit(one,t)]=t
     counts=dict(Counter(r.get('status','unknown') for r in entries.values()))
     print('Download status:',json.dumps(counts),'Manifest:',old_path,flush=True)
-    if blocked:raise SystemExit('Download rejected by the source. See HTTP status and response above, and '+str(old_path)+'. Remaining hours were not attempted. Do not bypass the rejection; ask course staff about source access. No real results or submission were generated.')
+    if blocked:raise SystemExit('Download rejected by the source. See HTTP status and response above, and '+str(old_path)+'. Remaining hours were not attempted. Do not bypass the rejection; check the client signature (error 1010) or ask course staff about source access. No real results or submission were generated.')
     failures=[n for n,r in entries.items() if r.get('status') not in ['ok','missing']]
     if failures:raise SystemExit(str(len(failures))+' source hours failed (see errors above and '+str(old_path)+'). Verified successful hours are cached; a normal retry resumes them. Modeling was not started.')
 

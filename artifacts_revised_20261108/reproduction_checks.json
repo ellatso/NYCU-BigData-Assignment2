@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "rebuilt_all_eight_tables": true,
+  "independent_model_fit": true,
+  "identical_csv_bytes": true,
+  "output_sha256": "f5be6efe08b0db172ead9a4e29ac184e41edc16bc3c25739654055231a3eff2b",
+  "scope": "official_gharchive"
+}

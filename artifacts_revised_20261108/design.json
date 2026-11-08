@@ -1,0 +1,56 @@
+{
+  "scope": "observed_official_gharchive",
+  "config": {
+    "task_start_taiwan": "2026-11-22T00:00:00+08:00",
+    "task_end_taiwan": "2026-11-29T00:00:00+08:00",
+    "deadline_taiwan": "2026-11-21T23:55:00+08:00",
+    "raw_start_utc": "2026-09-01T00:00:00+00:00",
+    "raw_end_utc": "2026-11-07T00:00:00+00:00",
+    "train_origins_taiwan": [
+      "2026-09-10",
+      "2026-09-17"
+    ],
+    "calibration_origins_taiwan": [
+      "2026-10-01",
+      "2026-10-08"
+    ],
+    "evaluation_origins_taiwan": [
+      "2026-10-22",
+      "2026-10-29"
+    ],
+    "observation_gap_hours": 4,
+    "trees": 160,
+    "seed": 42,
+    "selection_rule": "Primary dynamic relational prototype fixed before real execution; thresholds use mean weekly calibration Score; best calibration reference reported separately",
+    "primary_model_family": "time-windowed relational aggregates plus six LightGBM classifiers",
+    "grading": {
+      "score": 0,
+      "source_acknowledgement": 1,
+      "Q1": 1,
+      "Q2": 3,
+      "Q3": 5,
+      "Q4": 5
+    },
+    "submission_variant": "dynamic_relations"
+  },
+  "source_period_utc": [
+    "2026-09-01 00:00:00",
+    "2026-11-07 00:00:00"
+  ],
+  "variants": [
+    "observed_history",
+    "recent7",
+    "temporal30",
+    "no_recency",
+    "no_trend",
+    "static_relations",
+    "temporal_static_relations",
+    "received_relations",
+    "dynamic_relations",
+    "no_peer_relations",
+    "availability_clock"
+  ],
+  "labels": "Seven-day observed occurrences, available by outcome end; incomplete GH Archive is not complete truth",
+  "selection": "Primary relational recipe fixed in config before real execution; thresholds use mean weekly calibration Score. Best calibration reference is reported separately.",
+  "grading": "F1 has zero grade weight in the Nov7 revision. Ablations are explanatory evidence."
+}

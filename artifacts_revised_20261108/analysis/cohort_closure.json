@@ -1,0 +1,10 @@
+{
+  "comments_on_cohort_authored_threads": 10524,
+  "of_which_by_thread_author": 10484,
+  "of_which_by_other_users": 40,
+  "note": "Only events performed by the 9,000 cohort users are kept, so replies by non-cohort users to a cohort user's thread are absent.",
+  "reviews_on_cohort_authored_prs": 2542,
+  "of_which_by_other_reviewers": 41,
+  "users_total": 10140,
+  "cohort_users": 5255
+}

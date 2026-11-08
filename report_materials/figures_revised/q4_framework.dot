@@ -1,0 +1,30 @@
+digraph framework {
+graph [rankdir=LR, bgcolor="#fcfcfb", fontname="DejaVu Sans", nodesep=0.3, ranksep=0.6, pad=0.25, compound=true];
+node [shape=box, style="rounded,filled", fillcolor="#ffffff", color="#c3c2b7", fontname="DejaVu Sans", fontsize=11, margin="0.15,0.08"];
+edge [color="#52514e", arrowsize=0.7, penwidth=1.2];
+subgraph cluster_data { label=<<b>1 · Data</b>>; fontsize=12; color="#c3c2b7"; style="rounded"; bgcolor="#f3f2ee";
+  gha [label="GH Archive\n1,608 hourly files\n09/01–11/07 UTC"];
+  pre [label="official preprocess.py\n(9,000-user cohort,\nanonymization)"];
+  db  [label="8 relational tables\n(Users, Repositories, PRs,\nIssues, comments, reviews,\nreview comments, pushes)"];
+  db -> pre -> gha [dir=back]; {rank=same; gha; pre; db;} }
+subgraph cluster_time { label=<<b>2 · As-of sampling (Q3)</b>>; fontsize=12; color="#c3c2b7"; style="rounded"; bgcolor="#eef4fc";
+  ev  [label="event stream\n(event time + row-visibility time)"];
+  asof [label="origin t (weekly, Thu 00:00 TW)\nkeep rows visible before t − 4 h;\nlater-known columns dropped"];
+  lab [label="label = activity in [t, t+7 d)\nvisible by t+7 d"];
+  ev -> asof; ev -> lab; {rank=same; lab; asof;} }
+subgraph cluster_feat { label=<<b>3 · Features</b>>; fontsize=12; color="#c3c2b7"; style="rounded"; bgcolor="#f3f2ee";
+  ft [label="temporal (Q3): counts in 7/14/30 d,\nactive days, distinct repos,\nrecency per activity, 7 vs 30 d trend", fillcolor="#e3eefb"];
+  fr [label="relational (Q2): FK joins →\nrepo activity of others (7 d),\nreviewed-repo new PRs (3 d),\nreceived replies (3/7 d), collaborators", fillcolor="#fde8de"];
+  fu [label="user profile:\naccount age, lifetime counts"]; {rank=same; fu; fr; ft;} }
+subgraph cluster_model { label=<<b>4 · Model</b>>; fontsize=12; color="#c3c2b7"; style="rounded"; bgcolor="#f3f2ee";
+  lgb [label="6 LightGBM classifiers\n(one per activity, seed 42,\nsingle-thread deterministic)"];
+  thr [label="per-activity thresholds\nmaximising mean weekly Score\non calibration weeks"];
+  abl [label="11 ablations +\ncopy-last-week baseline\non development weeks"];
+  abl -> thr -> lgb [dir=back]; {rank=same; lgb; thr; abl;} }
+subgraph cluster_out { label=<<b>5 · Output</b>>; fontsize=12; color="#c3c2b7"; style="rounded"; bgcolor="#f3f2ee";
+  refit [label="refit on all completed weeks\n(9 origins, 09/10 – 10/31 TW)"];
+  csv [label="output_113700058.csv\n4,465 users × 6 activities\n(155 unseen → calibration prior)"];
+  rep [label="official evaluate.py format check +\nindependent rebuild & refit:\nidentical CSV bytes"];
+  rep -> csv -> refit [dir=back]; {rank=same; refit; csv; rep;} }
+db -> ev; asof -> ft; asof -> fr; asof -> fu; ft -> lgb; fr -> lgb; fu -> lgb; lab -> lgb; abl -> refit;
+}

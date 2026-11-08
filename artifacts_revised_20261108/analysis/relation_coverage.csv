@@ -1,0 +1,9 @@
+week_tw,group,columns,users,share_users_nonzero
+2026-10-22,relational: collaborators,7,5119,0.013479195155303771
+2026-10-22,relational: received interactions,12,5119,0.0007814026176987692
+2026-10-22,relational: repository activity,13,5119,0.061730806798202774
+2026-10-22,relational: static,18,5119,0.9904278179331901
+2026-10-29,relational: collaborators,7,5215,0.013231064237775647
+2026-10-29,relational: received interactions,12,5215,0.0
+2026-10-29,relational: repository activity,13,5215,0.0538830297219559
+2026-10-29,relational: static,18,5215,0.9907957813998083
