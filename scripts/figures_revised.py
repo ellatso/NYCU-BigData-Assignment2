@@ -136,13 +136,14 @@ def volume_multiples(out, weekly, design):
         ax.text(w.week.iloc[int(w[t].idxmax())] + pd.Timedelta(days=3.5), peak, f'{peak:,}', ha='center', va='bottom', fontsize=9, color=INK)
         ax.set_ylim(0, peak * 1.18)
         ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f'{v/1000:.0f}k' if v >= 1000 else f'{v:.0f}'))
+        ax.xaxis.set_major_locator(mdates.DayLocator(bymonthday=[1, 15]))
         ax.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
     for ax in axes[1]:
         ax.tick_params(axis='x', rotation=45)
-    fig.suptitle('Recorded activity per week is not stationary: PR/issue/review activity drops ~5× after 09/17, pushes almost vanish after 10/29',
+    fig.suptitle('Recorded rows per week: PR/issue/review rows drop ~5× after 09/17; pushes almost vanish after 10/29',
                  x=.01, ha='left', fontweight='bold', fontsize=12.5)
-    fig.text(.01, -.02, 'Rows per Taiwan week (Thursday start) in the 8 preprocessed tables, by event time. Shaded: development weeks. '
-             'All 1,608 source hours downloaded and passed gzip checks, so the drop is in GH Archive content, not missing files.', fontsize=9, color=MUTED)
+    fig.text(.01, -.07, 'Rows per Taiwan week (Thursday start) in the 8 preprocessed tables, by event time. Shaded: development weeks.\n'
+             'All 1,608 source hours were downloaded and passed gzip checks, so the drop is in GH Archive content, not missing files.', fontsize=9, color=MUTED)
     fig.tight_layout()
     save(fig, out, 'q3_weekly_volume')
 
@@ -244,9 +245,7 @@ def relation_evidence(out, coverage, closure, share):
     a1.set_yticks(yy); a1.set_yticklabels([g.replace('relational: ', '') for g in order]); a1.set_xlim(0, 1.18)
     a1.xaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0, decimals=0)); a1.grid(axis='y', visible=False)
     a1.set_title('Users with a non-zero feature (week 10/22)', fontsize=11.5)
-    a1.text(0, -.24, f"Cohort closure: of {closure['comments_on_cohort_authored_threads']:,} comments on cohort-authored threads,\n"
-            f"only {closure['of_which_by_other_users']} are by someone else; of {closure['reviews_on_cohort_authored_prs']:,} reviews on cohort PRs, "
-            f"{closure['of_which_by_other_reviewers']} by others.", transform=a1.transAxes, fontsize=9, color=INK2)
+    # cohort-closure counts are stated on the slide / in cohort_closure.json
     rel = [g for g in share.columns if g.startswith('relational')]
     data = pd.DataFrame(index=share.index)
     data['temporal: recency'] = share['temporal: recency']; data['relational (all)'] = share[rel].sum(1)
@@ -330,7 +329,16 @@ def main():
     ap.add_argument('--run', required=True); ap.add_argument('--analysis', required=True)
     ap.add_argument('--data', help='prepared data, for table row counts in the schema graph')
     ap.add_argument('--out', default='report_materials/figures_revised')
+    ap.add_argument('--scale', type=float, default=1.0,
+                    help='shrink figure canvases (text keeps its point size), e.g. 0.8 for slide versions')
     a = ap.parse_args()
+    if a.scale != 1.0:
+        _subplots = plt.subplots
+        def scaled(*args, figsize=None, **kw):
+            if figsize is not None:
+                figsize = (figsize[0] * a.scale, figsize[1] * a.scale)
+            return _subplots(*args, figsize=figsize, **kw)
+        plt.subplots = scaled
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
     run, an = Path(a.run), Path(a.analysis)
     design = json.loads((run / 'design.json').read_text())
