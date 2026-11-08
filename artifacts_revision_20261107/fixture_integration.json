@@ -1,0 +1,8 @@
+{
+  "scope": "synthetic_fixture_only",
+  "official_new_roster_format_check": true,
+  "users": 4465,
+  "independent_fixture_fits_identical_csv": true,
+  "real_prediction_generated": false,
+  "warning": "All fixture users are artificial. This is a format/reproduction contract check, not real performance or final prediction."
+}

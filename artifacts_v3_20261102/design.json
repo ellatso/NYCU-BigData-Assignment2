@@ -1,0 +1,91 @@
+{
+  "train_origin_pool": [
+    "2026-05-06 16:00:00",
+    "2026-05-13 16:00:00",
+    "2026-05-20 16:00:00",
+    "2026-05-27 16:00:00",
+    "2026-06-03 16:00:00",
+    "2026-06-10 16:00:00",
+    "2026-06-17 16:00:00",
+    "2026-06-24 16:00:00",
+    "2026-07-01 16:00:00",
+    "2026-07-08 16:00:00",
+    "2026-07-15 16:00:00",
+    "2026-07-22 16:00:00",
+    "2026-07-29 16:00:00",
+    "2026-08-05 16:00:00",
+    "2026-08-12 16:00:00",
+    "2026-08-19 16:00:00",
+    "2026-08-26 16:00:00",
+    "2026-09-02 16:00:00",
+    "2026-09-09 16:00:00"
+  ],
+  "calibration_origins": [
+    "2026-08-12 16:00:00",
+    "2026-08-26 16:00:00",
+    "2026-09-09 16:00:00",
+    "2026-09-23 16:00:00"
+  ],
+  "development_origins": [
+    "2026-10-07 16:00:00",
+    "2026-10-14 16:00:00",
+    "2026-10-21 16:00:00"
+  ],
+  "recipes": [
+    "full_history",
+    "recent12",
+    "weighted6"
+  ],
+  "frequency_weights": [
+    0,
+    0.25,
+    0.5
+  ],
+  "recent_window": "last 12 eligible origin weeks",
+  "weighting": "6-week half-life, normalized mean sample weight 1",
+  "observation_gap_hours": 4,
+  "feature_set": "original temporal 51 columns",
+  "threshold_objective": "official pooled combined-F1 across four chronological OOF weeks",
+  "selection": "maximum pooled calibration score only, fixed recipe/alpha order breaks ties",
+  "reserved_origin": "2026-10-29T00:00:00+08:00",
+  "reserved_outcomes_scored": false,
+  "data_manifest": {
+    "Users": {
+      "sha256": "fe48fec0989e032d6caa07c725dcf03bb14c561e4b4615b37713177d5c444349",
+      "bytes": 1275539
+    },
+    "Repositories": {
+      "sha256": "8d92d9e72ebfa52282435234caa2e8904bf46d21a50ef9495240e0b05636bafa",
+      "bytes": 4389065
+    },
+    "PullRequests": {
+      "sha256": "1b546070dc1d8cccb66aedb27d847d247057d8cbadc75883f343aa2401fb3ef8",
+      "bytes": 27132318
+    },
+    "Issues": {
+      "sha256": "208252fa32e52391c668f74a940feda4b10ae3c13f617a5e7546c3dbeb57edd6",
+      "bytes": 68171304
+    },
+    "IssueComments": {
+      "sha256": "a1a5d6ff0d07b01f65390c10e702c259131354690f68dffc82aac533b2aa8476",
+      "bytes": 19191260
+    },
+    "PRReviews": {
+      "sha256": "10772ce0f80a27303007bd67d0e62481542dd9e5214bdbde4b9705e849eac85e",
+      "bytes": 7577849
+    },
+    "PRReviewComments": {
+      "sha256": "e6006528aaaa543d731d90f3c23218e4a5fe7e6c716f60c480847dee62d82a24",
+      "bytes": 21379598
+    },
+    "Pushes": {
+      "sha256": "20e911196afd519f35ca915977032158ff43463f3a3d345979989bc839f0a6b3",
+      "bytes": 43301671
+    }
+  },
+  "source_sha256": {
+    "asg2/calibration.py": "666a270588adbd8023783064c3c154e49fe0441b759353f5743d25fcb972dbf1",
+    "scripts/experiment_v3.py": "8b7391c7cc1300f4a2ef236bb45207bfb3e1c459b60d713704a8b9ee9914c618"
+  },
+  "caution": "Calibration score fits thresholds and is optimistic. October development weeks have been inspected before."
+}

@@ -1,0 +1,7 @@
+{
+  "asg2/calibration.py": "666a270588adbd8023783064c3c154e49fe0441b759353f5743d25fcb972dbf1",
+  "scripts/experiment_v3.py": "8b7391c7cc1300f4a2ef236bb45207bfb3e1c459b60d713704a8b9ee9914c618",
+  "scripts/isolate_calibration_v3.py": "84e2a5cbd175a2d4177947191f708599e8986e3e7e840ada07e36f48d40aa053",
+  "scripts/freeze_baseline.py": "f8f01615268aab2089d3cea80ac3db51eb8cecc32dac751230024e2ddda9a59d",
+  "tests/test_calibration.py": "59a590172b4d72075865a0a45ad0f1cf910e33245af209ebf1ea5d10e771ff4c"
+}

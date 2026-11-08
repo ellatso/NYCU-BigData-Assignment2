@@ -1,0 +1,114 @@
+{
+  "selected_by_calibration": "weighted6_freq50",
+  "candidates": {
+    "full_history_freq0": {
+      "recipe": "full_history",
+      "frequency_weight": 0,
+      "thresholds": [
+        0.22499999999999998,
+        0.25,
+        0.125,
+        0.075,
+        0.1,
+        0.25
+      ]
+    },
+    "full_history_freq25": {
+      "recipe": "full_history",
+      "frequency_weight": 0.25,
+      "thresholds": [
+        0.175,
+        0.22499999999999998,
+        0.125,
+        0.1,
+        0.1,
+        0.3
+      ]
+    },
+    "full_history_freq50": {
+      "recipe": "full_history",
+      "frequency_weight": 0.5,
+      "thresholds": [
+        0.22499999999999998,
+        0.2,
+        0.2,
+        0.15,
+        0.1,
+        0.35
+      ]
+    },
+    "recent12_freq0": {
+      "recipe": "recent12",
+      "frequency_weight": 0,
+      "thresholds": [
+        0.075,
+        0.2,
+        0.15,
+        0.075,
+        0.175,
+        0.25
+      ]
+    },
+    "recent12_freq25": {
+      "recipe": "recent12",
+      "frequency_weight": 0.25,
+      "thresholds": [
+        0.125,
+        0.175,
+        0.15,
+        0.125,
+        0.125,
+        0.3
+      ]
+    },
+    "recent12_freq50": {
+      "recipe": "recent12",
+      "frequency_weight": 0.5,
+      "thresholds": [
+        0.15,
+        0.25,
+        0.2,
+        0.15,
+        0.1,
+        0.35
+      ]
+    },
+    "weighted6_freq0": {
+      "recipe": "weighted6",
+      "frequency_weight": 0,
+      "thresholds": [
+        0.15,
+        0.22499999999999998,
+        0.25,
+        0.075,
+        0.125,
+        0.2
+      ]
+    },
+    "weighted6_freq25": {
+      "recipe": "weighted6",
+      "frequency_weight": 0.25,
+      "thresholds": [
+        0.175,
+        0.2,
+        0.175,
+        0.1,
+        0.125,
+        0.3
+      ]
+    },
+    "weighted6_freq50": {
+      "recipe": "weighted6",
+      "frequency_weight": 0.5,
+      "thresholds": [
+        0.2,
+        0.22499999999999998,
+        0.2,
+        0.15,
+        0.15,
+        0.37499999999999994
+      ]
+    }
+  },
+  "status": "experimental frozen comparison; final submission route unchanged"
+}

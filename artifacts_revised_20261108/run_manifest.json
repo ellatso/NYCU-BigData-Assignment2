@@ -1,0 +1,57 @@
+{
+  "scope": "observed_official_gharchive",
+  "data_provenance_sha256": "0148f584e9ea321f4e02259fd43e6d3fb19d73d210a80d0a85c33bfc304e30f5",
+  "config": {
+    "task_start_taiwan": "2026-11-22T00:00:00+08:00",
+    "task_end_taiwan": "2026-11-29T00:00:00+08:00",
+    "deadline_taiwan": "2026-11-21T23:55:00+08:00",
+    "raw_start_utc": "2026-09-01T00:00:00+00:00",
+    "raw_end_utc": "2026-11-07T00:00:00+00:00",
+    "train_origins_taiwan": [
+      "2026-09-10",
+      "2026-09-17"
+    ],
+    "calibration_origins_taiwan": [
+      "2026-10-01",
+      "2026-10-08"
+    ],
+    "evaluation_origins_taiwan": [
+      "2026-10-22",
+      "2026-10-29"
+    ],
+    "observation_gap_hours": 4,
+    "trees": 160,
+    "seed": 42,
+    "selection_rule": "Primary dynamic relational prototype fixed before real execution; thresholds use mean weekly calibration Score; best calibration reference reported separately",
+    "primary_model_family": "time-windowed relational aggregates plus six LightGBM classifiers",
+    "grading": {
+      "score": 0,
+      "source_acknowledgement": 1,
+      "Q1": 1,
+      "Q2": 3,
+      "Q3": 5,
+      "Q4": 5
+    },
+    "submission_variant": "dynamic_relations"
+  },
+  "source_sha256": {
+    "asg2/core.py": "ad625b9be557b2544e741000ab064ccb02fe60b4cbd0e69f025d3d0e9c68919f",
+    "asg2/dynamic_relations.py": "5c6bb18b0ed1c0534ea4b4a07a1f624df752d7dd883d37410d35dbeca4442fd1",
+    "asg2/revised.py": "7768882c381dd61836a2717cde19cbb8e53c2534e286c7d99b6c7fcf1f08f7cb",
+    "asg2/coverage.py": "3eac33d64b00a4d07b864607035a9cd6528b9c558f63e3f84a9a17dfbc26a34e",
+    "asg2/run.py": "f40d6bff14f01fe198c2c6783f54d1c9af845ccd2721e7181ca78fa16716db98",
+    "asg2/provenance.py": "45f269d11714aca3d2004a9f97c6032d3f51ad998fcad3b06495c9f5bb792f33"
+  },
+  "official_pin": {
+    "repository": "https://github.com/nycubigdata-2026fall/BigData2026-Assignment2",
+    "commit": "af9f335301d9badb482dfafa10c4534eabac845a",
+    "files": {
+      "scripts/preprocess.py": "e281e4f72f56b1d4e8c8c68b57ba35700f7ad7d720cd7f643e4e132935dde517",
+      "scripts/evaluate.py": "9d18f122f394eda3ab30320cea04ebabc44a1fe28449fc1dff71fb6fb461e5ca",
+      "scripts/cohort.txt": "4d3c38abfaa85928c8c6ee5ccdbaf4c5702c981167f354cdb83258d516d3309c",
+      "submission/test_input.csv": "3bc4f0e2250f44bad45dfcd6dbc9517e0dd4aa5959d9ec11540859e052931f8e",
+      "SCHEMA.md": "7f8c8846b09783e5d1bbfa94515c1992bcdf0c66f9729bf8bca31be90043feb6",
+      "README.md": "2ab38f28579e746742f925b0fee6517992e7cbea8a1105fc19db16411cb62f96"
+    }
+  }
+}

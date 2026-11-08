@@ -1,0 +1,19 @@
+{
+  "selected": "dynamic_relations",
+  "recipe_fixed_before_real_execution": true,
+  "best_calibration_reference": "static_relations",
+  "scope": "observed_official_gharchive",
+  "calibration_scores": {
+    "observed_history": 0.5220662583755022,
+    "recent7": 0.5190205665879019,
+    "temporal30": 0.5237732596753991,
+    "no_recency": 0.5215695489724389,
+    "no_trend": 0.5197358419620123,
+    "static_relations": 0.5275856396851153,
+    "temporal_static_relations": 0.523352927619448,
+    "received_relations": 0.5237732596753991,
+    "dynamic_relations": 0.5247605296521765,
+    "no_peer_relations": 0.5245429814416842,
+    "availability_clock": 0.5229805557933634
+  }
+}

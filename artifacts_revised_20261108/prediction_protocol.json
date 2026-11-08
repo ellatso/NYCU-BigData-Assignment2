@@ -1,0 +1,29 @@
+{
+  "scope": "observed_official_gharchive",
+  "target_start_utc": "2026-11-21 16:00:00",
+  "outcome_end_utc": "2026-11-28 16:00:00",
+  "feature_cutoff_utc": "2026-11-07 00:00:00",
+  "forecast_lead_hours": 352.0,
+  "input_sha256": "3bc4f0e2250f44bad45dfcd6dbc9517e0dd4aa5959d9ec11540859e052931f8e",
+  "output_sha256": "f5be6efe08b0db172ead9a4e29ac184e41edc16bc3c25739654055231a3eff2b",
+  "users": 4465,
+  "observed_users": 4310,
+  "unseen_users": 155,
+  "cold_start_policy": "Calibration per-target observed prevalence, followed by the fixed threshold",
+  "data_provenance_sha256": "0148f584e9ea321f4e02259fd43e6d3fb19d73d210a80d0a85c33bfc304e30f5",
+  "model": "dynamic_relations",
+  "model_sha256": "840b713c14ddf514d10789af3a747f7967839eb68085b459d355788d4c45a5c5",
+  "refitted": true,
+  "refit_origins": [
+    "2026-09-09 16:00:00",
+    "2026-09-16 16:00:00",
+    "2026-09-23 16:00:00",
+    "2026-09-30 16:00:00",
+    "2026-10-07 16:00:00",
+    "2026-10-14 16:00:00",
+    "2026-10-21 16:00:00",
+    "2026-10-28 16:00:00",
+    "2026-10-30 16:00:00"
+  ],
+  "note": "An early prediction can have a long lead; no official accuracy or upload is claimed."
+}

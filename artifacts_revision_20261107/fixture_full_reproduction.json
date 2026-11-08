@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "rebuilt_all_eight_tables": true,
+  "independent_model_fit": true,
+  "identical_csv_bytes": true,
+  "output_sha256": "a90e22bd8487d37bb9e8224fd2386fe0c61df74f127f8dfa24b3d410f3c240e0",
+  "scope": "synthetic_fixture_only"
+}

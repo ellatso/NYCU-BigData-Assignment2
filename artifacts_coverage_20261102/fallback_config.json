@@ -1,0 +1,16 @@
+{
+  "method": "12-observation-week push frequency, clock ending at last observed push if stale",
+  "threshold": 0.6,
+  "stale_hours": 168,
+  "calibration_origins": [
+    "2026-08-19 16:00:00",
+    "2026-09-09 16:00:00"
+  ],
+  "calibration_mean_push_f1": 0.5624997754443148,
+  "requires_stress_test": false,
+  "warning": "Fallback activates after seven days without push records. Last observed push is not a verified complete boundary; historical internal gaps remain a limitation.",
+  "validated_for_use": true,
+  "stress_test_scope": "Simulated trailing push-feature loss of 7/14/21 days; original labels retained",
+  "stress_test_mean_push_f1_naive": 0.4009776617584306,
+  "stress_test_mean_push_f1_fallback": 0.611509101680079
+}

@@ -1,0 +1,8 @@
+{
+  "last_observed_push_utc": "2026-10-26 10:06:14",
+  "push_age_hours": 145.8961111111111,
+  "fallback_recommended": true,
+  "stale_threshold_hours": 48,
+  "latest_observed_record_utc": "2026-11-01 11:56:09",
+  "warning": "Staleness is a coverage warning, not proof of missing records or inactivity."
+}

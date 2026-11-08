@@ -1,0 +1,11 @@
+test_frozen_push_frequency_ignores_later_calendar_staleness (test_coverage_dynamic.CoverageDynamicTests.test_frozen_push_frequency_ignores_later_calendar_staleness) ... ok
+test_latest_complete_window_is_included_without_future_labels (test_coverage_dynamic.CoverageDynamicTests.test_latest_complete_window_is_included_without_future_labels) ... ok
+test_rank_ties_are_stable_and_counts_exact (test_coverage_dynamic.CoverageDynamicTests.test_rank_ties_are_stable_and_counts_exact) ... ok
+test_received_and_peer_activity_excludes_self_and_future (test_coverage_dynamic.CoverageDynamicTests.test_received_and_peer_activity_excludes_self_and_future) ... ok
+test_reviewed_repo_counts_only_visible_new_prs (test_coverage_dynamic.CoverageDynamicTests.test_reviewed_repo_counts_only_visible_new_prs) ... ok
+test_target_label_exclusion_only_changes_push_head (test_coverage_dynamic.CoverageDynamicTests.test_target_label_exclusion_only_changes_push_head) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.831s
+
+OK

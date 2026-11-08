@@ -1,0 +1,21 @@
+{
+  "revision_date": "2026-11-07",
+  "official_commit": "af9f335301d9badb482dfafa10c4534eabac845a",
+  "new_roster_users": 4465,
+  "raw_download": {
+    "status": "BLOCKED",
+    "http_status": 403,
+    "source_error": "1010",
+    "url": "https://data.gharchive.org/2026-10-01-0.json.gz"
+  },
+  "real_preprocessing": "PENDING",
+  "real_experiments": "PENDING",
+  "real_submission_csv": "NOT_GENERATED",
+  "real_reproduction": "PENDING",
+  "old_results": "ARCHIVED: previous data and Nov12 target; not used as new evidence",
+  "e3_submission": "NOT_PERFORMED",
+  "automated_contract_tests_passed": 30,
+  "scope": "Implementation ready; real revised-data execution blocked, not a final submission",
+  "synthetic_full_official_rebuild_and_refit": "PASSED",
+  "submission_variant": "dynamic_relations, fixed before any real revised-data execution"
+}

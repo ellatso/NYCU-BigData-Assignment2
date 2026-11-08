@@ -1,0 +1,15 @@
+{
+  "source_sha256": {
+    "asg2/coverage.py": "e3fda0aaee1710a67a0b3c0492b2d3f46410830560aad06bd45886c65b22b332",
+    "asg2/dynamic_relations.py": "5c6bb18b0ed1c0534ea4b4a07a1f624df752d7dd883d37410d35dbeca4442fd1",
+    "asg2/run.py": "05ccff49856549525c28e8d3f82588e272ff1cc6813f56d2bddeb43d223dc364",
+    "scripts/experiment_coverage.py": "1d9a150d1eb46d845755f0a32c81d7d7749dcb59fd37efc6b4ad40be3c80439e",
+    "tests/test_coverage_dynamic.py": "bd492610229c02596bf7046a66cfc5fe44e68ebd86d474d7cc283803f2aa6ce9"
+  },
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "pyarrow": "26.0.0",
+    "lightgbm": "4.7.0"
+  }
+}

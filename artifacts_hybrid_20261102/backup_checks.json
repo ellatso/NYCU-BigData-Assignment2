@@ -1,0 +1,13 @@
+{
+  "backup_csv_created": true,
+  "official_format_check_passed": true,
+  "users": 3960,
+  "exact_id_order": true,
+  "source_snapshot_latest_utc": "2026-11-01 11:56:09",
+  "feature_cutoff_utc": "2026-11-01 11:56:09.000000001",
+  "forecast_target_utc": "2026-11-11 16:00:00",
+  "forecast_lead_hours": 244.0641666663889,
+  "refitted": false,
+  "hybrid_candidate": "temporal_blend",
+  "e3_submitted": false
+}

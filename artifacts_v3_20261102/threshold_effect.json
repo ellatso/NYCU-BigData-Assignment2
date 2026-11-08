@@ -1,0 +1,154 @@
+{
+  "original_vs_full_history_max_probability_difference": 0.0,
+  "same_probabilities": true,
+  "original_singleweek": {
+    "open_pr": {
+      "tp": 399,
+      "fp": 531,
+      "fn": 625,
+      "predicted_positive_rate": 0.07244119021654463,
+      "precision": 0.4290322580645161,
+      "recall": 0.3896484375
+    },
+    "open_issue": {
+      "tp": 267,
+      "fp": 272,
+      "fn": 344,
+      "predicted_positive_rate": 0.04198473282442748,
+      "precision": 0.49536178107606677,
+      "recall": 0.4369885433715221
+    },
+    "issue_comment": {
+      "tp": 272,
+      "fp": 545,
+      "fn": 384,
+      "predicted_positive_rate": 0.06363919613646986,
+      "precision": 0.3329253365973072,
+      "recall": 0.4146341463414634
+    },
+    "pr_review": {
+      "tp": 285,
+      "fp": 479,
+      "fn": 440,
+      "predicted_positive_rate": 0.05951082723165602,
+      "precision": 0.3730366492146597,
+      "recall": 0.3931034482758621
+    },
+    "pr_review_comment": {
+      "tp": 151,
+      "fp": 258,
+      "fn": 286,
+      "predicted_positive_rate": 0.031858544944695436,
+      "precision": 0.3691931540342298,
+      "recall": 0.34553775743707094
+    },
+    "push": {
+      "tp": 4566,
+      "fp": 5550,
+      "fn": 286,
+      "predicted_positive_rate": 0.7879732045489952,
+      "precision": 0.4513641755634638,
+      "recall": 0.9410552349546579
+    }
+  },
+  "full_history_freq0": {
+    "open_pr": {
+      "tp": 812,
+      "fp": 4436,
+      "fn": 212,
+      "predicted_positive_rate": 0.40878641532949056,
+      "precision": 0.15472560975609756,
+      "recall": 0.79296875
+    },
+    "open_issue": {
+      "tp": 423,
+      "fp": 1326,
+      "fn": 188,
+      "predicted_positive_rate": 0.13623617385885653,
+      "precision": 0.241852487135506,
+      "recall": 0.6923076923076923
+    },
+    "issue_comment": {
+      "tp": 587,
+      "fp": 5240,
+      "fn": 69,
+      "predicted_positive_rate": 0.4538868982707587,
+      "precision": 0.10073794405354385,
+      "recall": 0.8948170731707317
+    },
+    "pr_review": {
+      "tp": 667,
+      "fp": 4708,
+      "fn": 58,
+      "predicted_positive_rate": 0.4186789219504596,
+      "precision": 0.12409302325581395,
+      "recall": 0.92
+    },
+    "pr_review_comment": {
+      "tp": 394,
+      "fp": 3666,
+      "fn": 43,
+      "predicted_positive_rate": 0.31624863685932386,
+      "precision": 0.09704433497536946,
+      "recall": 0.9016018306636155
+    },
+    "push": {
+      "tp": 4150,
+      "fp": 3960,
+      "fn": 702,
+      "predicted_positive_rate": 0.6317183361894376,
+      "precision": 0.5117139334155364,
+      "recall": 0.8553173948887057
+    }
+  },
+  "weighted6_freq50": {
+    "open_pr": {
+      "tp": 767,
+      "fp": 3287,
+      "fn": 257,
+      "predicted_positive_rate": 0.3157812743417978,
+      "precision": 0.18919585594474592,
+      "recall": 0.7490234375
+    },
+    "open_issue": {
+      "tp": 417,
+      "fp": 1068,
+      "fn": 194,
+      "predicted_positive_rate": 0.11567222308770836,
+      "precision": 0.2808080808080808,
+      "recall": 0.6824877250409165
+    },
+    "issue_comment": {
+      "tp": 520,
+      "fp": 2854,
+      "fn": 136,
+      "predicted_positive_rate": 0.2628135223555071,
+      "precision": 0.15411973918197985,
+      "recall": 0.7926829268292683
+    },
+    "pr_review": {
+      "tp": 625,
+      "fp": 3088,
+      "fn": 100,
+      "predicted_positive_rate": 0.2892195045957314,
+      "precision": 0.16832749798007002,
+      "recall": 0.8620689655172413
+    },
+    "pr_review_comment": {
+      "tp": 364,
+      "fp": 2524,
+      "fn": 73,
+      "predicted_positive_rate": 0.22495715843589345,
+      "precision": 0.1260387811634349,
+      "recall": 0.8329519450800915
+    },
+    "push": {
+      "tp": 3746,
+      "fp": 2826,
+      "fn": 1106,
+      "predicted_positive_rate": 0.5119177441969154,
+      "precision": 0.5699939135727328,
+      "recall": 0.7720527617477329
+    }
+  }
+}

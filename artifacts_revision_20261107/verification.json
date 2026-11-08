@@ -1,0 +1,7 @@
+{
+  "tests": 30,
+  "failures": 0,
+  "errors": 0,
+  "all_passed": true,
+  "scope": "Non-neural regression and synthetic official-CLI contract tests; not real model accuracy"
+}

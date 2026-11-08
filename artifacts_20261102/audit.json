@@ -1,0 +1,141 @@
+{
+  "tables": {
+    "Users": {
+      "rows": 46040,
+      "columns": 6,
+      "duplicate_pk": 0,
+      "null_pk": 0,
+      "invalid_foreign_keys": {},
+      "row_time": "first_seen_at",
+      "row_time_nulls": 0,
+      "min_time": "2025-12-01 00:01:12",
+      "max_time": "2026-11-01 11:39:58"
+    },
+    "Repositories": {
+      "rows": 110624,
+      "columns": 7,
+      "duplicate_pk": 0,
+      "null_pk": 0,
+      "invalid_foreign_keys": {},
+      "row_time": "first_seen_at",
+      "row_time_nulls": 0,
+      "min_time": "2025-12-01 00:01:12",
+      "max_time": "2026-11-01 11:05:56"
+    },
+    "PullRequests": {
+      "rows": 306585,
+      "columns": 18,
+      "duplicate_pk": 0,
+      "null_pk": 0,
+      "invalid_foreign_keys": {},
+      "row_time": "first_seen_at",
+      "row_time_nulls": 0,
+      "min_time": "2025-12-01 00:03:36",
+      "max_time": "2026-11-01 11:53:31"
+    },
+    "Issues": {
+      "rows": 175435,
+      "columns": 20,
+      "duplicate_pk": 0,
+      "null_pk": 0,
+      "invalid_foreign_keys": {},
+      "row_time": "first_seen_at",
+      "row_time_nulls": 0,
+      "min_time": "2025-12-01 00:01:55",
+      "max_time": "2026-11-01 11:56:09"
+    },
+    "IssueComments": {
+      "rows": 107370,
+      "columns": 10,
+      "duplicate_pk": 0,
+      "null_pk": 0,
+      "invalid_foreign_keys": {},
+      "row_time": "created_at",
+      "row_time_nulls": 0,
+      "min_time": "2025-12-01 00:01:55",
+      "max_time": "2026-11-01 11:46:49"
+    },
+    "PRReviews": {
+      "rows": 91958,
+      "columns": 12,
+      "duplicate_pk": 0,
+      "null_pk": 0,
+      "invalid_foreign_keys": {},
+      "row_time": "first_seen_at",
+      "row_time_nulls": 0,
+      "min_time": "2025-12-01 00:26:48",
+      "max_time": "2026-11-01 11:25:50"
+    },
+    "PRReviewComments": {
+      "rows": 67114,
+      "columns": 17,
+      "duplicate_pk": 0,
+      "null_pk": 0,
+      "invalid_foreign_keys": {},
+      "row_time": "created_at",
+      "row_time_nulls": 0,
+      "min_time": "2025-12-01 00:30:42",
+      "max_time": "2026-11-01 11:08:28"
+    },
+    "Pushes": {
+      "rows": 1676179,
+      "columns": 10,
+      "duplicate_pk": 0,
+      "null_pk": 0,
+      "invalid_foreign_keys": {},
+      "row_time": "created_at",
+      "row_time_nulls": 0,
+      "min_time": "2025-12-01 00:01:12",
+      "max_time": "2026-10-26 10:06:14"
+    }
+  },
+  "structural_errors": [],
+  "test_users": {
+    "rows": 3960,
+    "duplicates": 0,
+    "unknown_ids": 0,
+    "all_cohort": true,
+    "reconstructed_selection_count": 3960,
+    "supplied_not_reconstructed": 0,
+    "reconstructed_not_supplied": 0,
+    "note": "Selection reconstruction can differ because rows arrive retrospectively."
+  },
+  "cohort_users": 9000,
+  "duplicate_github_user_ids": 0,
+  "zero_event_days_since_september": {
+    "open_pr": [],
+    "open_issue": [],
+    "issue_comment": [],
+    "pr_review": [],
+    "pr_review_comment": [
+      "2026-10-09"
+    ],
+    "push": [
+      "2026-09-02",
+      "2026-09-03",
+      "2026-09-04",
+      "2026-10-16",
+      "2026-10-17",
+      "2026-10-27",
+      "2026-10-28",
+      "2026-10-29",
+      "2026-10-30",
+      "2026-10-31",
+      "2026-11-01"
+    ]
+  },
+  "warnings": [
+    "Zero recorded events do not prove collection failure or true inactivity.",
+    "Historical truth is reconstructed from this release, not TA private truth.",
+    "Latest per-target timestamps differ; recent six-target scores are provisional.",
+    "Final calendar day is partial."
+  ],
+  "official_commit": "cfe57edec97a4c4408053a71fd0fdb9d746930dc",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "pyarrow": "26.0.0",
+    "lightgbm": "4.7.0",
+    "scikit-learn": "1.8.0"
+  }
+}

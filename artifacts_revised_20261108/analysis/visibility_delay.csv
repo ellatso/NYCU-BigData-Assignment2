@@ -1,0 +1,7 @@
+target,table,rows,share_delayed_over_1h,share_delayed_over_24h,p99_hours
+open_pr,PullRequests,16694,0.06816820414520187,0.02839343476698215,255.2207777777772
+open_issue,Issues,19379,0.469735280458228,0.3035244336653078,41876.7940000004
+issue_comment,IssueComments,15245,0.0,0.0,0.0
+pr_review,PRReviews,12524,0.02331523474928138,0.00415202810603641,4.959977777777814
+pr_review_comment,PRReviewComments,9999,0.0,0.0,0.0
+push,Pushes,88781,0.0,0.0,0.0

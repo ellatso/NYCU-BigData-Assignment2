@@ -1,5 +1,5 @@
 """Train, calibrate and hold out time-separated weeks. Never use holdout to tune thresholds."""
-import argparse,csv,json,pickle,subprocess,time,hashlib
+import argparse,csv,json,pickle,subprocess,time,hashlib,sys,tempfile,os
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -10,13 +10,16 @@ class Constant:
     def __init__(self,p):self.p=p
     def predict_proba(self,X):return np.tile([1-self.p,self.p],(len(X),1))
 
-def fit_models(X,y,columns,trees=160):
+def fit_models(X,y,columns,trees=160,target_masks=None):
     models=[]
     for j,kind in enumerate(TARGETS):
-        if len(np.unique(y[:,j]))<2:m=Constant(float(y[:,j].mean()))
+        keep=np.ones(len(X),dtype=bool) if target_masks is None or kind not in target_masks else np.asarray(target_masks[kind],dtype=bool)
+        if not keep.any():raise ValueError(f'No usable training labels for {kind}')
+        yy=y[keep,j]
+        if len(np.unique(yy))<2:m=Constant(float(yy.mean()))
         else:
             m=LGBMClassifier(n_estimators=trees,learning_rate=.045,num_leaves=23,max_depth=-1,min_child_samples=70,reg_lambda=4,subsample=.85,subsample_freq=1,colsample_bytree=.85,random_state=42,n_jobs=4,verbosity=-1)
-            m.fit(X[columns],y[:,j])
+            m.fit(X.loc[keep,columns],yy)
         models.append(m)
     return models
 
@@ -103,34 +106,89 @@ def benchmark(args):
     print(df[df.split=='holdout'].to_string(index=False))
 
 def final_predict(args):
+    from .coverage import complete_training_origins,push_status,push_frequency,prediction_cutoffs
+    from .enhanced import suspect_push_days,push_training_mask
     out=Path(args.out);protocol=json.loads((out/'protocol.json').read_text());variant=protocol['selected_by_calibration_only']
-    with (out/f'model_{variant}.pkl').open('rb') as f:chosen=pickle.load(f)
+    hybrid=None;hybrid_name=None;checkpoint=out/f'model_{variant}.pkl'
+    if getattr(args,'hybrid_config',None):
+        selection=json.loads(Path(args.hybrid_config).read_text());hybrid_name=selection['selected_challenger']
+        hybrid=selection['configs'][hybrid_name];checkpoint=out/hybrid['checkpoint']
+    with checkpoint.open('rb') as f:chosen=pickle.load(f)
     tables=load_tables(args.data);events=build_events(tables)
     ids=pd.read_csv(args.input).UserID.to_numpy()
-    target=stamp('2026-11-12 00:00:00+08:00');observation_end=target-pd.Timedelta(hours=4)
-    if events.available_at.max()<pd.Timestamp('2026-11-11 11:00:00'):
-        raise ValueError('Official final predictions require the final Nov11 release. Do not submit an October dry run.')
+    force=getattr(args,'force',False);no_refit=getattr(args,'no_refit',False)
+    if no_refit and not force:raise ValueError('--no-refit requires --force; the final path must refit')
+    plan=prediction_cutoffs(events.available_at.max(),force)
+    target=plan['target'];observation_end=plan['feature_cutoff']
+    if force:print('BACKUP: freshness check overridden; feature clock ends at actual observed data. This is not the final-release forecast.',flush=True)
     # Refitting includes only complete outcome windows before the observation cutoff.
     start=protocol['train_origins'][0]
-    origins=pd.date_range(start,target-pd.Timedelta(days=7),freq='7D')
-    origins=origins[origins+pd.Timedelta(days=7)<=observation_end]
+    origins=complete_training_origins(start,plan['training_cutoff'])
     manifest=fingerprint(args.data);digest=hashlib.sha256(json.dumps(manifest,sort_keys=True).encode()).hexdigest()[:16]
     cache=out/'cache'/digest;cache.mkdir(parents=True,exist_ok=True)
-    X,y=make_samples(tables,events,origins,cache,4)
-    cols=chosen['columns'];models=fit_models(X,y,cols,args.trees)
-    Xtest=features(tables,events,target,user_ids=ids,gap_hours=4)
-    pred=predict(models,Xtest,cols)>=chosen['thresholds']
+    cols=chosen['columns'];excluded=0
+    if no_refit:
+        models=chosen['models'];origins=[]
+    else:
+        X,y=make_samples(tables,events,origins,cache,4)
+        if any(c.startswith('d_') for c in cols) and not set(cols).issubset(X.columns):
+            from .dynamic_relations import dynamic_features
+            X=pd.concat([dynamic_features(tables,events,g,t) for t,g in X.groupby('origin',sort=False)],ignore_index=True)
+        pushmask=push_training_mask(X.origin,suspect_push_days(events));excluded=int((~pushmask).sum())
+        models=fit_models(X,y,cols,args.trees,target_masks={'push':pushmask})
+    # For an early backup, avoid aging all recency features through unobserved days.
+    Xtest=features(tables,events,observation_end+pd.Timedelta(hours=4),user_ids=ids,gap_hours=4)
+    if any(c.startswith('d_') for c in cols):
+        from .dynamic_relations import dynamic_features
+        Xtest=dynamic_features(tables,events,Xtest,observation_end+pd.Timedelta(hours=4))
+    prob=predict(models,Xtest,cols)
+    if hybrid:
+        from .hybrid import last_week,apply_hybrid
+        pred=apply_hybrid(prob,last_week(Xtest),hybrid)
+    else:pred=prob>=chosen['thresholds']
+    policy_path=Path(args.push_policy_config) if args.push_policy_config else out/'fallback_config.json'
+    policy=json.loads(policy_path.read_text()) if policy_path.exists() else None
+    status=push_status(events,observation_end,stale_hours=policy.get('stale_hours',48) if policy else 48)
+    if status['coverage_warning']:print('PUSH COVERAGE WARNING:',status,flush=True)
+    emergency_policy=False
+    if status['fallback_recommended']:
+        if not policy or not policy.get('validated_for_use',False):
+            if not force:raise ValueError('Push coverage is stale. Supply a validated --push-policy-config, or use --force for a backup with an explicitly unvalidated emergency policy.')
+            policy={'threshold':.5,'validated_for_use':False};emergency_policy=True
+            print('BACKUP WARNING: no validated push policy; use majority of 12 observation weeks as an unvalidated emergency heuristic.',flush=True)
+        pred[:,-1]=push_frequency(events,tables,observation_end,Xtest.UserID,freeze_clock=True)>=policy['threshold']
     df=pd.DataFrame(pred.astype('int8'),columns=TARGETS);df.insert(0,'UserID',Xtest.UserID.to_numpy())
-    destination=out/f'output_{args.student_id}.csv';df.to_csv(destination,index=False)
-    # Run the OFFICIAL evaluator, which checks both header and exact user set.
-    cmd=['python',str(Path(args.data)/'evaluation/evaluate.py'),'--pred',str(destination),'--input',args.input]
-    subprocess.run(cmd,check=True)
-    (out/'final_protocol.json').write_text(json.dumps({'model':variant,'target_start_utc':str(target),'feature_cutoff_utc':str(observation_end),'refit_origins':[str(t) for t in origins],'thresholds_from_historical_calibration':chosen['thresholds'].tolist(),'data_manifest':manifest},indent=2))
-    print('Official-format prediction file:',destination)
+    # Validate a temporary file before atomically replacing a deliverable. A failed
+    # run cannot truncate the earlier valid CSV, and backups have separate folders.
+    destination_dir=out/('backup_'+pd.Timestamp.now(tz='Asia/Taipei').strftime('%Y%m%dT%H%M%S%f')) if force else out
+    destination_dir.mkdir(parents=True,exist_ok=True)
+    destination=destination_dir/f'output_{args.student_id}.csv'
+    fd,tmp=tempfile.mkstemp(prefix='.prediction_',suffix='.csv',dir=destination_dir);os.close(fd)
+    try:
+        df.to_csv(tmp,index=False)
+        subprocess.run([sys.executable,str(Path(args.data)/'evaluation/evaluate.py'),'--pred',tmp,'--input',args.input],check=True)
+        if not np.array_equal(df.UserID.to_numpy(),ids):raise ValueError('Prediction ID order differs from the official input')
+        os.replace(tmp,destination)
+    finally:
+        if Path(tmp).exists():Path(tmp).unlink()
+    metadata={'model':chosen.get('variant',variant),'checkpoint':str(checkpoint),'backup':force,'refitted':not no_refit,'freshness_overridden':force,
+        'latest_observed_record_utc':str(events.available_at.max()),'target_start_utc':str(target),
+        'feature_cutoff_utc':str(observation_end),'forecast_lead_hours':float((target-observation_end).total_seconds()/3600),
+        'refit_origins':[str(t) for t in origins],'push_training_rows_excluded':excluded,
+        'push_coverage':status,'push_fallback_used':status['fallback_recommended'],
+        'push_emergency_policy_unvalidated':emergency_policy,
+        'hybrid_candidate':hybrid_name,'hybrid_config':hybrid,
+        'thresholds_from_historical_calibration':np.asarray(hybrid['thresholds'] if hybrid else chosen['thresholds']).tolist(),'data_manifest':manifest}
+    (destination_dir/('backup_protocol.json' if force else 'final_protocol.json')).write_text(json.dumps(metadata,indent=2))
+    print('BACKUP prediction file:' if force else 'Official-format prediction file:',destination,flush=True)
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('action',choices=['benchmark','predict']);p.add_argument('--data',required=True);p.add_argument('--out',default='artifacts');p.add_argument('--train-start',default='2026-05-07');p.add_argument('--trees',type=int,default=160);p.add_argument('--gap-hours',type=int,default=4);p.add_argument('--input');p.add_argument('--student-id',default='113700058')
+    p=argparse.ArgumentParser();p.add_argument('action',choices=['benchmark','predict']);p.add_argument('--data',required=True);p.add_argument('--out',default='artifacts');p.add_argument('--train-start',default='2026-05-07');p.add_argument('--trees',type=int,default=160);p.add_argument('--gap-hours',type=int,default=4);p.add_argument('--input');p.add_argument('--student-id',default='113700058');p.add_argument('--push-policy-config')
+    p.add_argument('--force',action='store_true',help='Create a labeled backup despite stale data or absent validated push policy; format/ID checks remain mandatory')
+    p.add_argument('--no-refit',action='store_true',help='With --force only: quickly reuse the saved historical weights for an emergency backup')
+    p.add_argument('--hybrid-config',help='Explicit fixed hybrid selection JSON; omit to retain the existing production recipe')
     a=p.parse_args()
+    if a.action=='predict':p.error('The legacy Nov12 prediction command is retired. Use python -m asg2.revised predict --help for the Nov22 task and newly preprocessed data.')
     if a.action=='predict' and not a.input:p.error('--input is required for predict')
     benchmark(a) if a.action=='benchmark' else final_predict(a)
 

@@ -1,0 +1,14 @@
+{
+  "source_sha256": {
+    "asg2/run.py": "0659d0e4134d23dacf1ccce5945acfb827099c28d8b6f46e0c476295c00a9870",
+    "asg2/coverage.py": "3eac33d64b00a4d07b864607035a9cd6528b9c558f63e3f84a9a17dfbc26a34e",
+    "asg2/hybrid.py": "454af86b0492022035c4aaeaccc400d55f1620eef217d953553ad7d5190501d1",
+    "scripts/experiment_hybrid.py": "3f35445f0096c37061bec51c5ba54fe1984ac901c9c50e1183872df24fc872b7",
+    "scripts/evaluate_hybrid_forward.py": "fd64213bb1940420b0659432d8add68c076ed58366fb664c2696cb12ae67c248",
+    "tests/test_hybrid_production.py": "7b0dc0b8fdec1abac2b3bde21b961fe0895a924b27b23285f09dd8e442b5d26f"
+  },
+  "checkpoint_sha256": {
+    "model_temporal.pkl": "2e2fadc783eb197a8c977928a0205acabd6fbd78df4f404080d2143f7db0d759",
+    "model_dynamic_relational_mean_threshold.pkl": "4ae37ecb21d7fe3a5d7a0e05b5591f3bdd792e82bc7c3ec792513979452819b8"
+  }
+}

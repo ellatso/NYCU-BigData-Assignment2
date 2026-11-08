@@ -11,3 +11,13 @@ assignment2_data/
 artifacts_step2/local/
 **/holdout_predictions_*.csv
 **/output_*.csv
+
+# Early submission backups and their private run metadata
+**/backup_*/
+
+# Revised raw/prepared/private run files
+raw_revised/
+prepared_revised/
+data_revised/
+artifacts_revised/
+fixture_predictions.csv

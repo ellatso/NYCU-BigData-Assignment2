@@ -1,0 +1,451 @@
+target,feature,group,gain
+open_pr,u_age_days,user profile,3317.5763439536095
+open_pr,u_lifetime_open_pr,user profile,323.4499489068985
+open_pr,u_lifetime_open_issue,user profile,124.19428944587708
+open_pr,u_lifetime_issue_comment,user profile,229.06009036302567
+open_pr,u_lifetime_pr_review,user profile,217.07471233606339
+open_pr,u_lifetime_pr_review_comment,user profile,95.1412501335144
+open_pr,u_lifetime_push,user profile,108.68315947055817
+open_pr,t_count7_open_pr,temporal: window counts,8543.553408563137
+open_pr,t_count7_open_issue,temporal: window counts,109.88842046260834
+open_pr,t_count7_issue_comment,temporal: window counts,39.3648601770401
+open_pr,t_count7_pr_review,temporal: window counts,92.97363030910492
+open_pr,t_count7_pr_review_comment,temporal: window counts,32.398109912872314
+open_pr,t_count7_push,temporal: window counts,25.29220962524414
+open_pr,t_active_days7,temporal: window counts,1145.2963021993637
+open_pr,t_repos7,temporal: window counts,91.09354078769684
+open_pr,t_count14_open_pr,temporal: window counts,800.7101572751999
+open_pr,t_count14_open_issue,temporal: window counts,78.08209955692291
+open_pr,t_count14_issue_comment,temporal: window counts,32.25518989562988
+open_pr,t_count14_pr_review,temporal: window counts,68.71364349126816
+open_pr,t_count14_pr_review_comment,temporal: window counts,0.0
+open_pr,t_count14_push,temporal: window counts,73.28486013412476
+open_pr,t_active_days14,temporal: window counts,275.9891807436943
+open_pr,t_repos14,temporal: window counts,195.91044998168945
+open_pr,t_count30_open_pr,temporal: window counts,26.930099368095398
+open_pr,t_count30_open_issue,temporal: window counts,50.80290961265564
+open_pr,t_count30_issue_comment,temporal: window counts,0.0
+open_pr,t_count30_pr_review,temporal: window counts,0.0
+open_pr,t_count30_pr_review_comment,temporal: window counts,0.0
+open_pr,t_count30_push,temporal: window counts,0.0
+open_pr,t_active_days30,temporal: window counts,444.35789692401886
+open_pr,t_repos30,temporal: window counts,171.61225950717926
+open_pr,t_recency_open_pr,temporal: recency,3992.194459080696
+open_pr,t_trend_open_pr,temporal: trend,414.687372982502
+open_pr,t_recency_open_issue,temporal: recency,913.0333360433578
+open_pr,t_trend_open_issue,temporal: trend,200.00049650669098
+open_pr,t_recency_issue_comment,temporal: recency,868.5812635421753
+open_pr,t_trend_issue_comment,temporal: trend,287.9531910419464
+open_pr,t_recency_pr_review,temporal: recency,843.5415170192719
+open_pr,t_trend_pr_review,temporal: trend,368.3582981824875
+open_pr,t_recency_pr_review_comment,temporal: recency,583.5700429677963
+open_pr,t_trend_pr_review_comment,temporal: trend,108.89809918403625
+open_pr,t_recency_push,temporal: recency,1308.1452713012695
+open_pr,t_trend_push,temporal: trend,180.73224079608917
+open_pr,d_received_3_IssueComments_received,relational: received interactions,0.0
+open_pr,d_received_3_IssueComments_partners,relational: received interactions,0.0
+open_pr,d_received_7_IssueComments_received,relational: received interactions,0.0
+open_pr,d_received_7_IssueComments_partners,relational: received interactions,0.0
+open_pr,d_received_3_PRReviews_received,relational: received interactions,0.0
+open_pr,d_received_3_PRReviews_partners,relational: received interactions,0.0
+open_pr,d_received_7_PRReviews_received,relational: received interactions,0.0
+open_pr,d_received_7_PRReviews_partners,relational: received interactions,0.0
+open_pr,d_received_3_PRReviewComments_received,relational: received interactions,0.0
+open_pr,d_received_3_PRReviewComments_partners,relational: received interactions,0.0
+open_pr,d_received_7_PRReviewComments_received,relational: received interactions,0.0
+open_pr,d_received_7_PRReviewComments_partners,relational: received interactions,0.0
+open_pr,d_reviewed_repo_new_pr3,relational: repository activity,17.554190039634705
+open_pr,d_repo7_open_pr_mean,relational: repository activity,105.9228892326355
+open_pr,d_repo7_open_pr_max,relational: repository activity,10.406989932060242
+open_pr,d_repo7_open_issue_mean,relational: repository activity,140.82262074947357
+open_pr,d_repo7_open_issue_max,relational: repository activity,30.73722994327545
+open_pr,d_repo7_issue_comment_mean,relational: repository activity,76.54235923290253
+open_pr,d_repo7_issue_comment_max,relational: repository activity,94.6499696969986
+open_pr,d_repo7_pr_review_mean,relational: repository activity,114.52046966552734
+open_pr,d_repo7_pr_review_max,relational: repository activity,50.578410387039185
+open_pr,d_repo7_pr_review_comment_mean,relational: repository activity,89.91634958982468
+open_pr,d_repo7_pr_review_comment_max,relational: repository activity,26.426661789417267
+open_pr,d_repo7_push_mean,relational: repository activity,0.0
+open_pr,d_repo7_push_max,relational: repository activity,15.374445915222168
+open_pr,d_cohort_collaborators90,relational: collaborators,0.0
+open_pr,d_peer7_open_pr,relational: collaborators,0.0
+open_pr,d_peer7_open_issue,relational: collaborators,0.0
+open_pr,d_peer7_issue_comment,relational: collaborators,0.0
+open_pr,d_peer7_pr_review,relational: collaborators,5.727880001068115
+open_pr,d_peer7_pr_review_comment,relational: collaborators,0.0
+open_pr,d_peer7_push,relational: collaborators,0.0
+open_issue,u_age_days,user profile,1700.9382083415985
+open_issue,u_lifetime_open_pr,user profile,137.783749461174
+open_issue,u_lifetime_open_issue,user profile,926.3973083496094
+open_issue,u_lifetime_issue_comment,user profile,240.19469517469406
+open_issue,u_lifetime_pr_review,user profile,135.3835107088089
+open_issue,u_lifetime_pr_review_comment,user profile,131.49238967895508
+open_issue,u_lifetime_push,user profile,123.49802404642105
+open_issue,t_count7_open_pr,temporal: window counts,180.05990993976593
+open_issue,t_count7_open_issue,temporal: window counts,157.47060960531235
+open_issue,t_count7_issue_comment,temporal: window counts,45.342169880867004
+open_issue,t_count7_pr_review,temporal: window counts,50.052029848098755
+open_issue,t_count7_pr_review_comment,temporal: window counts,50.883216202259064
+open_issue,t_count7_push,temporal: window counts,101.81909638643265
+open_issue,t_active_days7,temporal: window counts,320.00418174266815
+open_issue,t_repos7,temporal: window counts,154.24390923976898
+open_issue,t_count14_open_pr,temporal: window counts,61.814940214157104
+open_issue,t_count14_open_issue,temporal: window counts,137.06573575735092
+open_issue,t_count14_issue_comment,temporal: window counts,6.840070009231567
+open_issue,t_count14_pr_review,temporal: window counts,77.93276071548462
+open_issue,t_count14_pr_review_comment,temporal: window counts,0.0
+open_issue,t_count14_push,temporal: window counts,43.42351031303406
+open_issue,t_active_days14,temporal: window counts,288.2269015312195
+open_issue,t_repos14,temporal: window counts,231.19501972198486
+open_issue,t_count30_open_pr,temporal: window counts,14.652430295944214
+open_issue,t_count30_open_issue,temporal: window counts,2836.071226000786
+open_issue,t_count30_issue_comment,temporal: window counts,0.0
+open_issue,t_count30_pr_review,temporal: window counts,0.0
+open_issue,t_count30_pr_review_comment,temporal: window counts,0.0
+open_issue,t_count30_push,temporal: window counts,0.0
+open_issue,t_active_days30,temporal: window counts,272.15181052684784
+open_issue,t_repos30,temporal: window counts,175.28350269794464
+open_issue,t_recency_open_pr,temporal: recency,814.7326498627663
+open_issue,t_trend_open_pr,temporal: trend,422.5892218351364
+open_issue,t_recency_open_issue,temporal: recency,9511.770868062973
+open_issue,t_trend_open_issue,temporal: trend,206.28293192386627
+open_issue,t_recency_issue_comment,temporal: recency,544.6170554757118
+open_issue,t_trend_issue_comment,temporal: trend,546.6057316064835
+open_issue,t_recency_pr_review,temporal: recency,397.86755257844925
+open_issue,t_trend_pr_review,temporal: trend,126.14091944694519
+open_issue,t_recency_pr_review_comment,temporal: recency,205.1382701396942
+open_issue,t_trend_pr_review_comment,temporal: trend,91.37778568267822
+open_issue,t_recency_push,temporal: recency,696.3177500963211
+open_issue,t_trend_push,temporal: trend,211.37521237134933
+open_issue,d_received_3_IssueComments_received,relational: received interactions,0.0
+open_issue,d_received_3_IssueComments_partners,relational: received interactions,0.0
+open_issue,d_received_7_IssueComments_received,relational: received interactions,0.0
+open_issue,d_received_7_IssueComments_partners,relational: received interactions,0.0
+open_issue,d_received_3_PRReviews_received,relational: received interactions,0.0
+open_issue,d_received_3_PRReviews_partners,relational: received interactions,0.0
+open_issue,d_received_7_PRReviews_received,relational: received interactions,0.0
+open_issue,d_received_7_PRReviews_partners,relational: received interactions,0.0
+open_issue,d_received_3_PRReviewComments_received,relational: received interactions,0.0
+open_issue,d_received_3_PRReviewComments_partners,relational: received interactions,0.0
+open_issue,d_received_7_PRReviewComments_received,relational: received interactions,0.0
+open_issue,d_received_7_PRReviewComments_partners,relational: received interactions,0.0
+open_issue,d_reviewed_repo_new_pr3,relational: repository activity,7.813067078590393
+open_issue,d_repo7_open_pr_mean,relational: repository activity,48.14584082365036
+open_issue,d_repo7_open_pr_max,relational: repository activity,2.414289951324463
+open_issue,d_repo7_open_issue_mean,relational: repository activity,177.56028079986572
+open_issue,d_repo7_open_issue_max,relational: repository activity,12.113919973373413
+open_issue,d_repo7_issue_comment_mean,relational: repository activity,48.70273578166962
+open_issue,d_repo7_issue_comment_max,relational: repository activity,3.1498600244522095
+open_issue,d_repo7_pr_review_mean,relational: repository activity,200.6507248878479
+open_issue,d_repo7_pr_review_max,relational: repository activity,39.66108000278473
+open_issue,d_repo7_pr_review_comment_mean,relational: repository activity,23.923330068588257
+open_issue,d_repo7_pr_review_comment_max,relational: repository activity,14.403849959373474
+open_issue,d_repo7_push_mean,relational: repository activity,0.0
+open_issue,d_repo7_push_max,relational: repository activity,0.0
+open_issue,d_cohort_collaborators90,relational: collaborators,11.003399968147278
+open_issue,d_peer7_open_pr,relational: collaborators,0.0
+open_issue,d_peer7_open_issue,relational: collaborators,0.0
+open_issue,d_peer7_issue_comment,relational: collaborators,0.990759015083313
+open_issue,d_peer7_pr_review,relational: collaborators,0.0
+open_issue,d_peer7_pr_review_comment,relational: collaborators,0.0
+open_issue,d_peer7_push,relational: collaborators,0.0
+issue_comment,u_age_days,user profile,3122.3545559048653
+issue_comment,u_lifetime_open_pr,user profile,247.22729313373566
+issue_comment,u_lifetime_open_issue,user profile,133.2363395690918
+issue_comment,u_lifetime_issue_comment,user profile,817.3476643562317
+issue_comment,u_lifetime_pr_review,user profile,114.50041043758392
+issue_comment,u_lifetime_pr_review_comment,user profile,121.5717304944992
+issue_comment,u_lifetime_push,user profile,116.55240964889526
+issue_comment,t_count7_open_pr,temporal: window counts,101.97317200899124
+issue_comment,t_count7_open_issue,temporal: window counts,62.59924936294556
+issue_comment,t_count7_issue_comment,temporal: window counts,5484.651680231094
+issue_comment,t_count7_pr_review,temporal: window counts,61.92864942550659
+issue_comment,t_count7_pr_review_comment,temporal: window counts,65.45412993431091
+issue_comment,t_count7_push,temporal: window counts,63.62365019321442
+issue_comment,t_active_days7,temporal: window counts,541.3733285665512
+issue_comment,t_repos7,temporal: window counts,282.69209909439087
+issue_comment,t_count14_open_pr,temporal: window counts,67.66475987434387
+issue_comment,t_count14_open_issue,temporal: window counts,108.73876690864563
+issue_comment,t_count14_issue_comment,temporal: window counts,22.962759613990784
+issue_comment,t_count14_pr_review,temporal: window counts,16.55252969264984
+issue_comment,t_count14_pr_review_comment,temporal: window counts,0.0
+issue_comment,t_count14_push,temporal: window counts,103.71996700763702
+issue_comment,t_active_days14,temporal: window counts,148.76800101995468
+issue_comment,t_repos14,temporal: window counts,149.29343020915985
+issue_comment,t_count30_open_pr,temporal: window counts,11.408730030059814
+issue_comment,t_count30_open_issue,temporal: window counts,48.67914021015167
+issue_comment,t_count30_issue_comment,temporal: window counts,0.0
+issue_comment,t_count30_pr_review,temporal: window counts,0.0
+issue_comment,t_count30_pr_review_comment,temporal: window counts,0.0
+issue_comment,t_count30_push,temporal: window counts,0.0
+issue_comment,t_active_days30,temporal: window counts,355.18335223197937
+issue_comment,t_repos30,temporal: window counts,162.73198103904724
+issue_comment,t_recency_open_pr,temporal: recency,790.5982701778412
+issue_comment,t_trend_open_pr,temporal: trend,240.1180204153061
+issue_comment,t_recency_open_issue,temporal: recency,941.747966170311
+issue_comment,t_trend_open_issue,temporal: trend,139.7742701768875
+issue_comment,t_recency_issue_comment,temporal: recency,7287.239688754082
+issue_comment,t_trend_issue_comment,temporal: trend,215.6629394888878
+issue_comment,t_recency_pr_review,temporal: recency,1103.7674342393875
+issue_comment,t_trend_pr_review,temporal: trend,490.16564893722534
+issue_comment,t_recency_pr_review_comment,temporal: recency,511.2812798023224
+issue_comment,t_trend_pr_review_comment,temporal: trend,306.3124318122864
+issue_comment,t_recency_push,temporal: recency,1020.7862082719803
+issue_comment,t_trend_push,temporal: trend,157.32596057653427
+issue_comment,d_received_3_IssueComments_received,relational: received interactions,0.0
+issue_comment,d_received_3_IssueComments_partners,relational: received interactions,0.0
+issue_comment,d_received_7_IssueComments_received,relational: received interactions,0.0
+issue_comment,d_received_7_IssueComments_partners,relational: received interactions,0.0
+issue_comment,d_received_3_PRReviews_received,relational: received interactions,0.0
+issue_comment,d_received_3_PRReviews_partners,relational: received interactions,0.0
+issue_comment,d_received_7_PRReviews_received,relational: received interactions,0.0
+issue_comment,d_received_7_PRReviews_partners,relational: received interactions,0.0
+issue_comment,d_received_3_PRReviewComments_received,relational: received interactions,0.0
+issue_comment,d_received_3_PRReviewComments_partners,relational: received interactions,0.0
+issue_comment,d_received_7_PRReviewComments_received,relational: received interactions,0.0
+issue_comment,d_received_7_PRReviewComments_partners,relational: received interactions,0.0
+issue_comment,d_reviewed_repo_new_pr3,relational: repository activity,48.3333820104599
+issue_comment,d_repo7_open_pr_mean,relational: repository activity,79.64913952350616
+issue_comment,d_repo7_open_pr_max,relational: repository activity,26.72042989730835
+issue_comment,d_repo7_open_issue_mean,relational: repository activity,456.12101447582245
+issue_comment,d_repo7_open_issue_max,relational: repository activity,56.98043918609619
+issue_comment,d_repo7_issue_comment_mean,relational: repository activity,227.5749306678772
+issue_comment,d_repo7_issue_comment_max,relational: repository activity,103.27088046073914
+issue_comment,d_repo7_pr_review_mean,relational: repository activity,92.51311016082764
+issue_comment,d_repo7_pr_review_max,relational: repository activity,83.1506198644638
+issue_comment,d_repo7_pr_review_comment_mean,relational: repository activity,40.92615020275116
+issue_comment,d_repo7_pr_review_comment_max,relational: repository activity,55.76324009895325
+issue_comment,d_repo7_push_mean,relational: repository activity,5.318590044975281
+issue_comment,d_repo7_push_max,relational: repository activity,7.526105999946594
+issue_comment,d_cohort_collaborators90,relational: collaborators,0.0
+issue_comment,d_peer7_open_pr,relational: collaborators,0.0
+issue_comment,d_peer7_open_issue,relational: collaborators,0.0
+issue_comment,d_peer7_issue_comment,relational: collaborators,0.0
+issue_comment,d_peer7_pr_review,relational: collaborators,2.508870005607605
+issue_comment,d_peer7_pr_review_comment,relational: collaborators,0.0
+issue_comment,d_peer7_push,relational: collaborators,0.0
+pr_review,u_age_days,user profile,2981.383636176586
+pr_review,u_lifetime_open_pr,user profile,208.5236097574234
+pr_review,u_lifetime_open_issue,user profile,99.39031028747559
+pr_review,u_lifetime_issue_comment,user profile,284.3015378713608
+pr_review,u_lifetime_pr_review,user profile,1160.242620229721
+pr_review,u_lifetime_pr_review_comment,user profile,382.7934432029724
+pr_review,u_lifetime_push,user profile,73.08969974517822
+pr_review,t_count7_open_pr,temporal: window counts,82.62964081764221
+pr_review,t_count7_open_issue,temporal: window counts,33.15222954750061
+pr_review,t_count7_issue_comment,temporal: window counts,69.48478996753693
+pr_review,t_count7_pr_review,temporal: window counts,1374.9965021014214
+pr_review,t_count7_pr_review_comment,temporal: window counts,202.86106884479523
+pr_review,t_count7_push,temporal: window counts,24.516240000724792
+pr_review,t_active_days7,temporal: window counts,113.91261982917786
+pr_review,t_repos7,temporal: window counts,148.20301926136017
+pr_review,t_count14_open_pr,temporal: window counts,103.56208026409149
+pr_review,t_count14_open_issue,temporal: window counts,33.24616003036499
+pr_review,t_count14_issue_comment,temporal: window counts,56.689466774463654
+pr_review,t_count14_pr_review,temporal: window counts,673.9145240783691
+pr_review,t_count14_pr_review_comment,temporal: window counts,10.651640176773071
+pr_review,t_count14_push,temporal: window counts,29.211793780326843
+pr_review,t_active_days14,temporal: window counts,159.38720107078552
+pr_review,t_repos14,temporal: window counts,300.58283030986786
+pr_review,t_count30_open_pr,temporal: window counts,11.997600078582764
+pr_review,t_count30_open_issue,temporal: window counts,55.76450002193451
+pr_review,t_count30_issue_comment,temporal: window counts,0.0
+pr_review,t_count30_pr_review,temporal: window counts,0.0
+pr_review,t_count30_pr_review_comment,temporal: window counts,0.0
+pr_review,t_count30_push,temporal: window counts,0.0
+pr_review,t_active_days30,temporal: window counts,92.20544004440308
+pr_review,t_repos30,temporal: window counts,120.91677141189575
+pr_review,t_recency_open_pr,temporal: recency,904.2326454520226
+pr_review,t_trend_open_pr,temporal: trend,159.02758920192719
+pr_review,t_recency_open_issue,temporal: recency,403.8287371993065
+pr_review,t_trend_open_issue,temporal: trend,181.54151940345764
+pr_review,t_recency_issue_comment,temporal: recency,859.0124214887619
+pr_review,t_trend_issue_comment,temporal: trend,388.71416103839874
+pr_review,t_recency_pr_review,temporal: recency,12720.999639034271
+pr_review,t_trend_pr_review,temporal: trend,180.66481935977936
+pr_review,t_recency_pr_review_comment,temporal: recency,2103.495155453682
+pr_review,t_trend_pr_review_comment,temporal: trend,223.70712345838547
+pr_review,t_recency_push,temporal: recency,1024.8408304452896
+pr_review,t_trend_push,temporal: trend,178.85487568378448
+pr_review,d_received_3_IssueComments_received,relational: received interactions,0.0
+pr_review,d_received_3_IssueComments_partners,relational: received interactions,0.0
+pr_review,d_received_7_IssueComments_received,relational: received interactions,0.0
+pr_review,d_received_7_IssueComments_partners,relational: received interactions,0.0
+pr_review,d_received_3_PRReviews_received,relational: received interactions,0.0
+pr_review,d_received_3_PRReviews_partners,relational: received interactions,0.0
+pr_review,d_received_7_PRReviews_received,relational: received interactions,0.0
+pr_review,d_received_7_PRReviews_partners,relational: received interactions,0.0
+pr_review,d_received_3_PRReviewComments_received,relational: received interactions,0.0
+pr_review,d_received_3_PRReviewComments_partners,relational: received interactions,0.0
+pr_review,d_received_7_PRReviewComments_received,relational: received interactions,0.0
+pr_review,d_received_7_PRReviewComments_partners,relational: received interactions,0.0
+pr_review,d_reviewed_repo_new_pr3,relational: repository activity,20.359476029872894
+pr_review,d_repo7_open_pr_mean,relational: repository activity,80.40737974643707
+pr_review,d_repo7_open_pr_max,relational: repository activity,30.217999696731567
+pr_review,d_repo7_open_issue_mean,relational: repository activity,13.158250093460083
+pr_review,d_repo7_open_issue_max,relational: repository activity,37.19014310836792
+pr_review,d_repo7_issue_comment_mean,relational: repository activity,179.22798037528992
+pr_review,d_repo7_issue_comment_max,relational: repository activity,36.8257200717926
+pr_review,d_repo7_pr_review_mean,relational: repository activity,133.0167180299759
+pr_review,d_repo7_pr_review_max,relational: repository activity,82.291190803051
+pr_review,d_repo7_pr_review_comment_mean,relational: repository activity,48.37275946140289
+pr_review,d_repo7_pr_review_comment_max,relational: repository activity,32.33227980136871
+pr_review,d_repo7_push_mean,relational: repository activity,76.17561984062195
+pr_review,d_repo7_push_max,relational: repository activity,0.0
+pr_review,d_cohort_collaborators90,relational: collaborators,82.97319483757019
+pr_review,d_peer7_open_pr,relational: collaborators,0.0
+pr_review,d_peer7_open_issue,relational: collaborators,0.0
+pr_review,d_peer7_issue_comment,relational: collaborators,0.0
+pr_review,d_peer7_pr_review,relational: collaborators,0.0
+pr_review,d_peer7_pr_review_comment,relational: collaborators,0.0
+pr_review,d_peer7_push,relational: collaborators,0.0
+pr_review_comment,u_age_days,user profile,2664.046810090542
+pr_review_comment,u_lifetime_open_pr,user profile,104.49022245407104
+pr_review_comment,u_lifetime_open_issue,user profile,190.08068943023682
+pr_review_comment,u_lifetime_issue_comment,user profile,434.4919812679291
+pr_review_comment,u_lifetime_pr_review,user profile,494.6460599899292
+pr_review_comment,u_lifetime_pr_review_comment,user profile,291.33201426267624
+pr_review_comment,u_lifetime_push,user profile,162.68842434883118
+pr_review_comment,t_count7_open_pr,temporal: window counts,36.971200346946716
+pr_review_comment,t_count7_open_issue,temporal: window counts,0.9845290184020996
+pr_review_comment,t_count7_issue_comment,temporal: window counts,68.00694978237152
+pr_review_comment,t_count7_pr_review,temporal: window counts,455.4893653392792
+pr_review_comment,t_count7_pr_review_comment,temporal: window counts,547.1190880537033
+pr_review_comment,t_count7_push,temporal: window counts,89.64905953407288
+pr_review_comment,t_active_days7,temporal: window counts,155.2066593170166
+pr_review_comment,t_repos7,temporal: window counts,234.96113002300262
+pr_review_comment,t_count14_open_pr,temporal: window counts,36.832889556884766
+pr_review_comment,t_count14_open_issue,temporal: window counts,83.34767198562622
+pr_review_comment,t_count14_issue_comment,temporal: window counts,35.663830280303955
+pr_review_comment,t_count14_pr_review,temporal: window counts,95.87114012241364
+pr_review_comment,t_count14_pr_review_comment,temporal: window counts,191.3238115310669
+pr_review_comment,t_count14_push,temporal: window counts,11.853709816932678
+pr_review_comment,t_active_days14,temporal: window counts,92.45610976219177
+pr_review_comment,t_repos14,temporal: window counts,235.29147559404373
+pr_review_comment,t_count30_open_pr,temporal: window counts,2.3839499950408936
+pr_review_comment,t_count30_open_issue,temporal: window counts,15.08098030090332
+pr_review_comment,t_count30_issue_comment,temporal: window counts,0.0
+pr_review_comment,t_count30_pr_review,temporal: window counts,0.0
+pr_review_comment,t_count30_pr_review_comment,temporal: window counts,0.0
+pr_review_comment,t_count30_push,temporal: window counts,0.0
+pr_review_comment,t_active_days30,temporal: window counts,145.66925942897797
+pr_review_comment,t_repos30,temporal: window counts,22.936050057411194
+pr_review_comment,t_recency_open_pr,temporal: recency,760.8292988538742
+pr_review_comment,t_trend_open_pr,temporal: trend,294.0601113438606
+pr_review_comment,t_recency_open_issue,temporal: recency,345.27510046958923
+pr_review_comment,t_trend_open_issue,temporal: trend,61.69721019268036
+pr_review_comment,t_recency_issue_comment,temporal: recency,570.0462899208069
+pr_review_comment,t_trend_issue_comment,temporal: trend,238.04674577713013
+pr_review_comment,t_recency_pr_review,temporal: recency,2187.7252185344696
+pr_review_comment,t_trend_pr_review,temporal: trend,259.2855392694473
+pr_review_comment,t_recency_pr_review_comment,temporal: recency,11019.037629723549
+pr_review_comment,t_trend_pr_review_comment,temporal: trend,193.99830102920532
+pr_review_comment,t_recency_push,temporal: recency,1089.3080952763557
+pr_review_comment,t_trend_push,temporal: trend,154.6548491716385
+pr_review_comment,d_received_3_IssueComments_received,relational: received interactions,0.0
+pr_review_comment,d_received_3_IssueComments_partners,relational: received interactions,0.0
+pr_review_comment,d_received_7_IssueComments_received,relational: received interactions,0.0
+pr_review_comment,d_received_7_IssueComments_partners,relational: received interactions,0.0
+pr_review_comment,d_received_3_PRReviews_received,relational: received interactions,0.0
+pr_review_comment,d_received_3_PRReviews_partners,relational: received interactions,0.0
+pr_review_comment,d_received_7_PRReviews_received,relational: received interactions,0.0
+pr_review_comment,d_received_7_PRReviews_partners,relational: received interactions,0.0
+pr_review_comment,d_received_3_PRReviewComments_received,relational: received interactions,0.0
+pr_review_comment,d_received_3_PRReviewComments_partners,relational: received interactions,0.0
+pr_review_comment,d_received_7_PRReviewComments_received,relational: received interactions,0.0
+pr_review_comment,d_received_7_PRReviewComments_partners,relational: received interactions,0.0
+pr_review_comment,d_reviewed_repo_new_pr3,relational: repository activity,0.0
+pr_review_comment,d_repo7_open_pr_mean,relational: repository activity,101.23057043552399
+pr_review_comment,d_repo7_open_pr_max,relational: repository activity,0.0
+pr_review_comment,d_repo7_open_issue_mean,relational: repository activity,129.6053027510643
+pr_review_comment,d_repo7_open_issue_max,relational: repository activity,50.389910101890564
+pr_review_comment,d_repo7_issue_comment_mean,relational: repository activity,45.919660210609436
+pr_review_comment,d_repo7_issue_comment_max,relational: repository activity,1.4834500551223755
+pr_review_comment,d_repo7_pr_review_mean,relational: repository activity,263.1461787223816
+pr_review_comment,d_repo7_pr_review_max,relational: repository activity,4.806879997253418
+pr_review_comment,d_repo7_pr_review_comment_mean,relational: repository activity,79.2608597278595
+pr_review_comment,d_repo7_pr_review_comment_max,relational: repository activity,4.226200103759766
+pr_review_comment,d_repo7_push_mean,relational: repository activity,3.9555999040603638
+pr_review_comment,d_repo7_push_max,relational: repository activity,0.0
+pr_review_comment,d_cohort_collaborators90,relational: collaborators,18.22284996509552
+pr_review_comment,d_peer7_open_pr,relational: collaborators,0.0
+pr_review_comment,d_peer7_open_issue,relational: collaborators,6.4194430112838745
+pr_review_comment,d_peer7_issue_comment,relational: collaborators,0.0
+pr_review_comment,d_peer7_pr_review,relational: collaborators,2.0170920491218567
+pr_review_comment,d_peer7_pr_review_comment,relational: collaborators,0.0
+pr_review_comment,d_peer7_push,relational: collaborators,0.0
+push,u_age_days,user profile,1671.4572940468788
+push,u_lifetime_open_pr,user profile,305.87598991394043
+push,u_lifetime_open_issue,user profile,106.88632941246033
+push,u_lifetime_issue_comment,user profile,166.86669051647186
+push,u_lifetime_pr_review,user profile,102.59206032752991
+push,u_lifetime_pr_review_comment,user profile,154.2614786028862
+push,u_lifetime_push,user profile,684.404599905014
+push,t_count7_open_pr,temporal: window counts,69.06182956695557
+push,t_count7_open_issue,temporal: window counts,37.107919692993164
+push,t_count7_issue_comment,temporal: window counts,109.98462045192719
+push,t_count7_pr_review,temporal: window counts,132.05525922775269
+push,t_count7_pr_review_comment,temporal: window counts,25.761539936065674
+push,t_count7_push,temporal: window counts,325.5685357451439
+push,t_active_days7,temporal: window counts,551.7738680839539
+push,t_repos7,temporal: window counts,121.33367991447449
+push,t_count14_open_pr,temporal: window counts,100.34991025924683
+push,t_count14_open_issue,temporal: window counts,92.72988998889923
+push,t_count14_issue_comment,temporal: window counts,40.98836970329285
+push,t_count14_pr_review,temporal: window counts,12.784199833869934
+push,t_count14_pr_review_comment,temporal: window counts,0.0
+push,t_count14_push,temporal: window counts,6012.627826929092
+push,t_active_days14,temporal: window counts,884.3474222421646
+push,t_repos14,temporal: window counts,271.31777918338776
+push,t_count30_open_pr,temporal: window counts,16.366820335388184
+push,t_count30_open_issue,temporal: window counts,102.04246962070465
+push,t_count30_issue_comment,temporal: window counts,0.0
+push,t_count30_pr_review,temporal: window counts,0.0
+push,t_count30_pr_review_comment,temporal: window counts,0.0
+push,t_count30_push,temporal: window counts,0.0
+push,t_active_days30,temporal: window counts,4365.727570295334
+push,t_repos30,temporal: window counts,212.62342071533203
+push,t_recency_open_pr,temporal: recency,1184.5378670692444
+push,t_trend_open_pr,temporal: trend,236.75112903118134
+push,t_recency_open_issue,temporal: recency,611.6285215616226
+push,t_trend_open_issue,temporal: trend,226.0438465476036
+push,t_recency_issue_comment,temporal: recency,975.3998944759369
+push,t_trend_issue_comment,temporal: trend,231.5951908826828
+push,t_recency_pr_review,temporal: recency,702.8080703020096
+push,t_trend_pr_review,temporal: trend,228.92845034599304
+push,t_recency_pr_review_comment,temporal: recency,274.74012064933777
+push,t_trend_pr_review_comment,temporal: trend,82.5857104063034
+push,t_recency_push,temporal: recency,1605.421637892723
+push,t_trend_push,temporal: trend,142.99107486009598
+push,d_received_3_IssueComments_received,relational: received interactions,0.0
+push,d_received_3_IssueComments_partners,relational: received interactions,0.0
+push,d_received_7_IssueComments_received,relational: received interactions,0.0
+push,d_received_7_IssueComments_partners,relational: received interactions,0.0
+push,d_received_3_PRReviews_received,relational: received interactions,0.0
+push,d_received_3_PRReviews_partners,relational: received interactions,0.0
+push,d_received_7_PRReviews_received,relational: received interactions,0.0
+push,d_received_7_PRReviews_partners,relational: received interactions,0.0
+push,d_received_3_PRReviewComments_received,relational: received interactions,0.0
+push,d_received_3_PRReviewComments_partners,relational: received interactions,0.0
+push,d_received_7_PRReviewComments_received,relational: received interactions,0.0
+push,d_received_7_PRReviewComments_partners,relational: received interactions,0.0
+push,d_reviewed_repo_new_pr3,relational: repository activity,0.0
+push,d_repo7_open_pr_mean,relational: repository activity,171.08502501249313
+push,d_repo7_open_pr_max,relational: repository activity,62.50951933860779
+push,d_repo7_open_issue_mean,relational: repository activity,178.79879808425903
+push,d_repo7_open_issue_max,relational: repository activity,30.774410903453827
+push,d_repo7_issue_comment_mean,relational: repository activity,28.968298316001892
+push,d_repo7_issue_comment_max,relational: repository activity,47.5070698261261
+push,d_repo7_pr_review_mean,relational: repository activity,231.43357038497925
+push,d_repo7_pr_review_max,relational: repository activity,40.49638915061951
+push,d_repo7_pr_review_comment_mean,relational: repository activity,151.8928703069687
+push,d_repo7_pr_review_comment_max,relational: repository activity,12.224429845809937
+push,d_repo7_push_mean,relational: repository activity,2.6727899312973022
+push,d_repo7_push_max,relational: repository activity,0.0
+push,d_cohort_collaborators90,relational: collaborators,0.0
+push,d_peer7_open_pr,relational: collaborators,0.0
+push,d_peer7_open_issue,relational: collaborators,0.0
+push,d_peer7_issue_comment,relational: collaborators,0.0
+push,d_peer7_pr_review,relational: collaborators,11.027179718017578
+push,d_peer7_pr_review_comment,relational: collaborators,0.0
+push,d_peer7_push,relational: collaborators,0.0

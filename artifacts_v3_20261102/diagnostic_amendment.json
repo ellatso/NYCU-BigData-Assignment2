@@ -1,0 +1,24 @@
+{
+  "reason": "Isolate training changes after observing multiweek threshold failure",
+  "timing": "Added after initial v3 development scores were inspected",
+  "candidates": [
+    "full_history_single_freq0",
+    "full_history_single_freq25",
+    "full_history_single_freq50",
+    "recent12_single_freq0",
+    "recent12_single_freq25",
+    "recent12_single_freq50",
+    "weighted6_single_freq0",
+    "weighted6_single_freq25",
+    "weighted6_single_freq50"
+  ],
+  "calibration_origin": "2026-09-24T00:00:00+08:00",
+  "development_origins": [
+    "2026-10-08",
+    "2026-10-15",
+    "2026-10-22"
+  ],
+  "reserved_outcomes_scored": false,
+  "threshold_selection": "Sep24 only",
+  "new_training": false
+}

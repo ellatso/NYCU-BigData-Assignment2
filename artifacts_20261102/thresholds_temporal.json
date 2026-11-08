@@ -1,0 +1,8 @@
+{
+  "open_pr": 0.65,
+  "open_issue": 0.49999999999999994,
+  "issue_comment": 0.65,
+  "pr_review": 0.7,
+  "pr_review_comment": 0.675,
+  "push": 0.15
+}

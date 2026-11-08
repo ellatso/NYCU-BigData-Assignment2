@@ -1,0 +1,25 @@
+{
+  "origins_taiwan": [
+    "2026-10-08",
+    "2026-10-15",
+    "2026-10-22",
+    "2026-10-29"
+  ],
+  "models": [
+    "all_zero",
+    "all_one",
+    "last_week_rule",
+    "frequency90_at_0.5",
+    "static",
+    "temporal",
+    "relational",
+    "full"
+  ],
+  "populations": [
+    "recent90_proxy",
+    "selection_lag14d"
+  ],
+  "no_tuning": true,
+  "thresholds_from": "2026-09-24 calibration only",
+  "note": "Latest snapshot refits, not preserved October checkpoints. New-week data coverage may be incomplete."
+}
