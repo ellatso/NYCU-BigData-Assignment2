@@ -12,6 +12,7 @@ import tempfile
 import urllib.request
 import urllib.error
 import zlib
+from collections import Counter
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 import pandas as pd
 from asg2.core import TABLES
@@ -32,10 +33,15 @@ def hours(start,end):
     return pd.date_range(start,end,freq='h',inclusive='left')
 
 def download(a):
+    if a.workers<1:raise ValueError('--workers must be at least 1')
     verify_vendor();raw=Path(a.raw);raw.mkdir(parents=True,exist_ok=True)
     plan=hours(a.start,a.end);old_path=raw/'download_manifest.json'
     old=json.loads(old_path.read_text()) if old_path.exists() else {'files':{}}
     entries={n:r for n,r in old['files'].items() if stamp_hour(r['hour_utc'])>=plan[0] and stamp_hour(r['hour_utc'])<plan[-1]+pd.Timedelta(hours=1)};module=official_module()
+    prior_blocks=[(n,r) for n,r in entries.items() if r.get('status')=='blocked']
+    if prior_blocks:
+        for n,r in prior_blocks[:5]:print(n,'HTTP',r.get('http_status'),r.get('error','source rejected request'),flush=True)
+        raise SystemExit('Source rejection is already recorded in '+str(old_path)+'. No further requests were sent. Keep this manifest and ask the course staff how to obtain the required source data; do not change clients or routes to bypass the rejection.')
     def one(t):
         name=t.strftime('%Y-%m-%d-')+str(t.hour)+'.json.gz';dest=raw/name
         previous=entries.get(name)
@@ -64,7 +70,9 @@ def download(a):
             os.replace(tmp,dest)
             record.update(status='ok',storage=a.storage,stored_sha256=sha256(dest),stored_bytes=dest.stat().st_size)
         except urllib.error.HTTPError as e:
-            record.update(status='missing' if e.code==404 else 'blocked',http_status=e.code)
+            record.update(status='missing' if e.code==404 else 'blocked',http_status=e.code,error='HTTP '+str(e.code)+': '+str(e.reason))
+            try:record['response_excerpt']=' '.join(e.read(512).decode('utf-8',errors='replace').split())[:300]
+            except OSError:pass
         except (OSError,EOFError,ValueError,zlib.error) as e:record['error']=type(e).__name__+': '+str(e)[:180]
         finally:
             for p in [Path(tmp),Path(str(tmp)+'.filtered')]:
@@ -82,11 +90,16 @@ def download(a):
                 running.pop(f);name,r=f.result();entries[name]=r;done+=1
                 manifest=dict(source='https://www.gharchive.org/',start_utc=plan[0].isoformat(),end_utc=(plan[-1]+pd.Timedelta(hours=1)).isoformat(),official_commit=verify_vendor()['commit'],files=entries)
                 old_path.write_text(json.dumps(manifest,indent=2))
-                print(done,'/',len(plan),name,r['status'],flush=True)
+                detail='; '.join(str(r[k]) for k in ['error','response_excerpt'] if r.get(k))
+                print(done,'/',len(plan),name,r['status'],detail,flush=True)
                 if r['status']=='blocked':blocked=True
                 t=None if blocked else next(it,None)
                 if t is not None:running[pool.submit(one,t)]=t
-    if blocked:raise SystemExit('Download rejected by the source. Remaining hours were not attempted. Use the supplied notebook in your own authorized runtime; no data or model score is fabricated.')
+    counts=dict(Counter(r.get('status','unknown') for r in entries.values()))
+    print('Download status:',json.dumps(counts),'Manifest:',old_path,flush=True)
+    if blocked:raise SystemExit('Download rejected by the source. See HTTP status and response above, and '+str(old_path)+'. Remaining hours were not attempted. Do not bypass the rejection; ask course staff about source access. No real results or submission were generated.')
+    failures=[n for n,r in entries.items() if r.get('status') not in ['ok','missing']]
+    if failures:raise SystemExit(str(len(failures))+' source hours failed (see errors above and '+str(old_path)+'). Verified successful hours are cached; a normal retry resumes them. Modeling was not started.')
 
 def build(a):
     pin=verify_vendor();raw=Path(a.raw);mp=raw/'download_manifest.json'

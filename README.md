@@ -28,6 +28,12 @@ Default raw period: `[2026-09-01 00:00,2026-11-07 00:00)` UTC. This is a **confi
 
 The optional cohort-storage mode applies the **exact official cohort filter**, retaining the same lines that the unchanged official builder would read. Original URLs, original gzip SHA256/size and retained-input SHA256/size are recorded. It reduces disk storage, not network transfer. The unchanged eight-table builder is still run afterward. Contract tests check filter idempotence and equality of all eight builder outputs on a synthetic example. `--storage full` keeps original hour files instead. Source CRC integrity is not proof of complete GitHub activity.
 
+## Download troubleshooting
+
+A final `CalledProcessError` alone does not identify the cause. The notebook now streams and saves combined stdout/stderr to `WORK/logs/latest_command.log`, includes the last error lines in its exception, and prints the first failed records from `RAW/download_manifest.json`. Share those details for diagnosis. Package/import errors can occur before any manifest exists.
+
+The first setup cell updates an existing clean checkout with `git pull --ff-only`; it refuses to overwrite tracked local edits. Reopen the latest notebook and rerun setup before using updated cells. `sys.executable` keeps installation and execution in the same Python environment. No raw data is deleted during updates. Successful checksummed hours are resumed. Explicit source rejections are recorded and prevent repeated requests in the same manifest. Ask course staff about source access rather than changing clients or routes to evade a rejection.
+
 ## Local commands
 
 ```bash
