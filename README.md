@@ -40,6 +40,18 @@ Findings used in the report:
 - **Label check against the TA reference week** (2026-09-27 – 10-04): our copy-last-week rule scores 50.39% vs 49.61% in the official README. Model rows on that week are optimistic because it overlaps the calibration window (`analysis/reference_week.csv`).
 - The submitted CSV uses the variant fixed before any real-data run (`dynamic_relations`), refit on 9 origins (09/10 – 10/31 Taiwan) with calibrated thresholds unchanged; 155 of 4,465 test users have no visible history and receive the calibration prior.
 
+
+## Extra experiment: temporal GNN (learned relations)
+
+`scripts/experiment_gnn.py` (needs `torch`; not part of the submission path) trains a 2-hop heterogeneous message-passing network user → repository → user on the same origins, labels and threshold procedure. Edges are user–repository pairs with an event in the last 90 days; edge features are log counts per activity in 7/30/90 days plus recency (time encoding). Inputs are clipped to the training range before standardization, because a neural network extrapolates when account age and recency grow past the training weeks. Mean of 3 seeds; two runs gave identical metrics.
+
+| Model (same temporal inputs) | Dev Score | Δ vs temporal LightGBM (95% CI) | TA reference week |
+|---|---:|---|---:|
+| MLP, no graph | 34.92% | −0.80 pt (−1.75, +0.12) | 53.06% |
+| Temporal GNN | 35.06% | −0.66 pt (−1.61, +0.47) | 54.55% |
+
+Message passing adds +0.14 pt over the same MLP on the development weeks (CI −0.80, +0.97) and +1.5 pt on the higher-activity reference week, consistent with the cohort-closure finding. The submitted CSV is unchanged.
+
 ## Run in Colab
 
 [Open the revised notebook](https://colab.research.google.com/github/ellatso/NYCU-BigData-Assignment2/blob/main/notebooks/Asg2_Revised_113700058.ipynb).

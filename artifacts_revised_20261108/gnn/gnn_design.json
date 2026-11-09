@@ -1,0 +1,48 @@
+{
+  "epochs": 150,
+  "hidden": 64,
+  "lr": 0.003,
+  "weight_decay": 0.0001,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "torch": "2.15.0+cu132",
+  "graph": "user--repository, edges = any event in last 90 days, edge features = log counts per activity in 7/30/90 d + recency",
+  "user_inputs": "temporal30 columns (43); all inputs clipped to the training range, then standardized",
+  "protocol": {
+    "task_start_taiwan": "2026-11-22T00:00:00+08:00",
+    "task_end_taiwan": "2026-11-29T00:00:00+08:00",
+    "deadline_taiwan": "2026-11-21T23:55:00+08:00",
+    "raw_start_utc": "2026-09-01T00:00:00+00:00",
+    "raw_end_utc": "2026-11-07T00:00:00+00:00",
+    "train_origins_taiwan": [
+      "2026-09-10",
+      "2026-09-17"
+    ],
+    "calibration_origins_taiwan": [
+      "2026-10-01",
+      "2026-10-08"
+    ],
+    "evaluation_origins_taiwan": [
+      "2026-10-22",
+      "2026-10-29"
+    ],
+    "observation_gap_hours": 4,
+    "trees": 160,
+    "seed": 42,
+    "selection_rule": "Primary dynamic relational prototype fixed before real execution; thresholds use mean weekly calibration Score; best calibration reference reported separately",
+    "primary_model_family": "time-windowed relational aggregates plus six LightGBM classifiers",
+    "grading": {
+      "score": 0,
+      "source_acknowledgement": 1,
+      "Q1": 1,
+      "Q2": 3,
+      "Q3": 5,
+      "Q4": 5
+    },
+    "submission_variant": "dynamic_relations"
+  },
+  "note": "Extra experiment; the submitted CSV is unchanged."
+}

@@ -123,3 +123,8 @@ Data (GH Archive → official preprocess → 8 tables) → as-of sampling (event
 - Relational aggregation adds little because the cohort-only data rarely contain other users' interactions with a cohort user.
 - The data distribution shifts strongly over the period; with only two development weeks, most differences are within ±1.5 pt and CIs overlap.
 - Not done: an end-to-end GNN/RDL model; the TA's GNN with time encoding is a natural next step.
+
+### Added 2026-11-09 · temporal GNN (`artifacts_revised_20261108/gnn/gnn_metrics.csv`)
+- MLP on temporal inputs: dev 34.92%, Δ vs temporal LightGBM −0.80 pt (−1.75, +0.12); reference week 53.06%.
+- Temporal GNN user → repo → user: dev 35.06%, −0.66 pt (−1.61, +0.47); reference week 54.55%.
+- GNN vs MLP: +0.14 pt (−0.80, +0.97) on dev; +1.5 pt on the reference week. Mean of 3 seeds; identical metrics on two runs.

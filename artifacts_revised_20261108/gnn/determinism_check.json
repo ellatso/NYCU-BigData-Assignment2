@@ -1,0 +1,5 @@
+{
+  "runs": 2,
+  "gnn_metrics_identical": true,
+  "note": "Two independent executions of scripts/experiment_gnn.py produced byte-identical gnn_metrics.csv."
+}
