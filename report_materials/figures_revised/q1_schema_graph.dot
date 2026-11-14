@@ -32,5 +32,5 @@ Pushes:user_id:e -> Users:pk:w [color="#2a78d6"];
 Pushes:repo_id:e -> Repositories:pk:w [color="#898781"];
 {rank=same; Users; Repositories;}
 {rank=same; IssueComments; PRReviewComments; Pushes;}
-legend [label=<<table border="0" cellspacing="2"><tr><td align="left"><font color="#2a78d6"><b>&#8594;</b></font> FK to Users</td></tr><tr><td align="left"><font color="#898781"><b>&#8594;</b></font> FK to Repositories</td></tr><tr><td align="left"><font color="#eb6834"><b>&#8594;</b></font> FK between activity tables</td></tr><tr><td align="left"><font point-size="9" color="#52514e">8 tables · 20 foreign keys · edge = FK &#8594; referenced PK</font></td></tr></table>>];
+legend [label=<<table border="0" cellspacing="2"><tr><td align="left"><font color="#2a78d6"><b>&#8594;</b></font> FK to Users (8)</td></tr><tr><td align="left"><font color="#898781"><b>&#8594;</b></font> FK to Repositories (6)</td></tr><tr><td align="left"><font color="#eb6834"><b>&#8594;</b></font> FK between activity tables (6)</td></tr><tr><td align="left"><font point-size="9" color="#52514e">8 tables · 20 foreign keys · edge = FK &#8594; referenced PK</font></td></tr></table>>];
 }

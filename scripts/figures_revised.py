@@ -88,7 +88,10 @@ def schema_graph(out, counts, wide=False):
             lines.append(f'{t}:{col}:e -> {ref}:pk:w [color="{ec}"];' if ref != t else f'{t}:{col}:e -> {t}:pk:e [constraint=false, color="{ec}"];')
     lines.append('{rank=same; Users; Repositories;}')
     lines.append('{rank=same; IssueComments; PRReviewComments; Pushes;}')
-    lines.append('legend [label=<<table border="0" cellspacing="2"><tr><td align="left"><font color="#2a78d6"><b>&#8594;</b></font> FK to Users</td></tr><tr><td align="left"><font color="#898781"><b>&#8594;</b></font> FK to Repositories</td></tr><tr><td align="left"><font color="#eb6834"><b>&#8594;</b></font> FK between activity tables</td></tr><tr><td align="left"><font point-size="9" color="#52514e">8 tables · 20 foreign keys · edge = FK &#8594; referenced PK</font></td></tr></table>>];')
+    n_u = sum(ref == 'Users' for _, (_, f) in SCHEMA.items() for _, ref in f)
+    n_r = sum(ref == 'Repositories' for _, (_, f) in SCHEMA.items() for _, ref in f)
+    n_a = sum(ref not in ('Users', 'Repositories') for _, (_, f) in SCHEMA.items() for _, ref in f)
+    lines.append(f'legend [label=<<table border="0" cellspacing="2"><tr><td align="left"><font color="#2a78d6"><b>&#8594;</b></font> FK to Users ({n_u})</td></tr><tr><td align="left"><font color="#898781"><b>&#8594;</b></font> FK to Repositories ({n_r})</td></tr><tr><td align="left"><font color="#eb6834"><b>&#8594;</b></font> FK between activity tables ({n_a})</td></tr><tr><td align="left"><font point-size="9" color="#52514e">8 tables · 20 foreign keys · edge = FK &#8594; referenced PK</font></td></tr></table>>];')
     lines.append('}')
     dot(out, 'q1_schema_graph', '\n'.join(lines))
 

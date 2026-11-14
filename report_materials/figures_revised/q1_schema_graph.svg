@@ -317,11 +317,11 @@
 <g id="node9" class="node">
 <title>legend</title>
 <text text-anchor="start" x="4" y="-766.2" font-family="DejaVu Sans" font-weight="bold" font-size="11.00" fill="#2a78d6">→</text>
-<text text-anchor="start" x="14" y="-766.2" font-family="DejaVu Sans" font-size="11.00"> FK to Users</text>
+<text text-anchor="start" x="14" y="-766.2" font-family="DejaVu Sans" font-size="11.00"> FK to Users (8)</text>
 <text text-anchor="start" x="4" y="-748.2" font-family="DejaVu Sans" font-weight="bold" font-size="11.00" fill="#898781">→</text>
-<text text-anchor="start" x="14" y="-748.2" font-family="DejaVu Sans" font-size="11.00"> FK to Repositories</text>
+<text text-anchor="start" x="14" y="-748.2" font-family="DejaVu Sans" font-size="11.00"> FK to Repositories (6)</text>
 <text text-anchor="start" x="4" y="-730.2" font-family="DejaVu Sans" font-weight="bold" font-size="11.00" fill="#eb6834">→</text>
-<text text-anchor="start" x="14" y="-730.2" font-family="DejaVu Sans" font-size="11.00"> FK between activity tables</text>
+<text text-anchor="start" x="14" y="-730.2" font-family="DejaVu Sans" font-size="11.00"> FK between activity tables (6)</text>
 <text text-anchor="start" x="4" y="-712.8" font-family="DejaVu Sans" font-size="9.00" fill="#52514e">8 tables · 20 foreign keys · edge = FK → referenced PK</text>
 </g>
 </g>
